@@ -1,4 +1,4 @@
-package Units;
+package units;
 
 public class Ogre extends Monster{
     public Ogre(String name, int level, int experience, int gold) {

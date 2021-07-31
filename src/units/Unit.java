@@ -1,4 +1,4 @@
-package Units;
+package units;
 
 public abstract class Unit implements Fighting {
 
@@ -41,11 +41,17 @@ public abstract class Unit implements Fighting {
 
     @Override
     public String toString() {
-        return "Units.Unit{" +
-                "name='" + name + '\'' +
-                ", level=" + level +
-                ", health=" + health +
-                '}';
+        return  "name='" + name + '\'' +
+                ", health=" + health;
+    }
+
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
     }
 
     @Override
