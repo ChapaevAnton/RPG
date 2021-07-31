@@ -1,3 +1,5 @@
+package Units;
+
 public interface Fighting {
 
     int attack();
