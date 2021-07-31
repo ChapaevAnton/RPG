@@ -39,12 +39,19 @@ public abstract class Unit implements Fighting {
 
     protected int gold;
 
-    @Override
-    public String toString() {
-        return  "name='" + name + '\'' +
-                ", health=" + health;
+    public void setLevel(int level) {
+        this.level = level;
     }
 
+    @Override
+    public String toString() {
+        return "Unit{" +
+                "name='" + name + '\'' +
+                ", power=" + power +
+                ", agility=" + agility +
+                ", luck=" + luck +
+                "}\n";
+    }
 
     public int getHealth() {
         return health;
