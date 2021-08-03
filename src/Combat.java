@@ -1,16 +1,15 @@
-import units.Unit;
+import units.CombatUnit;
 
 public class Combat {
 
-    private Unit unitFirst;
-    private Unit unitSecond;
+    private final CombatUnit unitFirst;
+    private final CombatUnit unitSecond;
     private boolean isFight = false;
 
-    public Combat(Unit unitFirst, Unit unitSecond) {
+    public Combat(CombatUnit unitFirst, CombatUnit unitSecond) {
         this.unitFirst = unitFirst;
         this.unitSecond = unitSecond;
     }
-
 
     public void combat() {
         int counter = 0;
@@ -28,22 +27,22 @@ public class Combat {
     }
 
 
-    private boolean fight(Unit attacker, Unit defender) {
+    private boolean fight(CombatUnit attacker, CombatUnit defender) {
 
-        if (defender.getHealth() > 0) {
-            int damage = (attacker.attack() - defender.defence());
+        if (defender.getHealth() < 0) return false;
 
-            if (damage <= defender.getHealth()) {
-                defender.setHealth(defender.getHealth() - damage);
-                System.out.println(attacker + " ударил на " + damage + " урона " + defender);
-                return true;
-            } else {
-                defender.setHealth(0);
-                System.out.println(attacker + " ударил на " + damage + " урона " + defender);
-                System.out.println("конец боя...");
-                return false;
-            }
+        int damage = (attacker.attack() - defender.defence());
+
+        if (damage <= defender.getHealth()) {
+            defender.setHealth(defender.getHealth() - damage);
+            System.out.println(attacker + " ударил на " + damage + " урона " + defender);
+            return true;
+        } else {
+            defender.setHealth(0);
+            System.out.println(attacker + " ударил на " + damage + " урона " + defender + "и убил");
+            System.out.println("конец боя...");
+            return false;
         }
-        return true;
+
     }
 }

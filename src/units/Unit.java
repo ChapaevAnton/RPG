@@ -1,56 +1,30 @@
 package units;
 
-public abstract class Unit implements Fighting {
+public abstract class Unit {
 
 
-    public static final int DAMAGE_BASE = 10;
-    public static final int DEFENCE_BASE = 10;
-    public static final int LEVEL_BASE = 1;
-    public static final int EXPERIENCE_BASE = 0;
-    public static final int GOLD_BASE = 50;
-
-
-    public Unit(String name, int level, int experience, int power, int agility, int luck, int damage, int defence,
-                int health, int gold) {
-        this.name = name;
-        this.level = level;
-        this.experience = experience;
-        this.power = power;
-        this.agility = agility;
-        this.luck = luck;
-        this.damage = damage;
-        this.defence = defence;
-        this.health = health;
-        this.gold = gold;
-    }
+    public static final int HEALTH = 100;
+    public static final int EXPERIENCE = 0;
+    public static final int GOLD = 50;
 
     protected String name;
-
-    protected int level;
+    protected int health;
+    protected int gold;
     protected int experience;
 
-    protected int power;
-    protected int agility;
-    protected int luck;
-
-    protected int damage;
-    protected int defence;
-    protected int health;
-
-    protected int gold;
-
-    public void setLevel(int level) {
-        this.level = level;
+    protected Unit(String name, int health, int gold, int experience) {
+        this.name = name;
+        this.health = health;
+        this.gold = gold;
+        this.experience = experience;
     }
 
-    @Override
-    public String toString() {
-        return "Unit{" +
-                "name='" + name + '\'' +
-                ", power=" + power +
-                ", agility=" + agility +
-                ", luck=" + luck +
-                "}\n";
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getHealth() {
@@ -61,23 +35,20 @@ public abstract class Unit implements Fighting {
         this.health = health;
     }
 
-    @Override
-    public int attack() {
-
-    /*
-    Random chance = new Random();
-    int critProc = chance.nextInt(9);
-    if(critProc + (int) luck/5 > 5){
-        hp = hp - (DAMAGE_BASE + (damage * (int) power/3))*2;
-    } else {
-        hp = hp - DAMAGE_BASE + (damage * (int) power/3);
-    }
-     */
-        return 0;
+    public int getGold() {
+        return gold;
     }
 
-    @Override
-    public int defence() {
-        return 0;
+    public void setGold(int gold) {
+        this.gold = gold;
     }
+
+    public int getExperience() {
+        return experience;
+    }
+
+    public void setExperience(int experience) {
+        this.experience = experience;
+    }
+
 }

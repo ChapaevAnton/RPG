@@ -10,6 +10,7 @@ public class GeneratorUnits {
     public GeneratorUnits(Hero hero) {
         this.hero = hero;
     }
+
     private Random random = new Random();
 
     public List<Monster> generateMonsters() {
@@ -18,9 +19,9 @@ public class GeneratorUnits {
 
         for (int i = 0; i < hero.level; i++) {
 
-            Skeleton skeleton = new Skeleton("скелет",1,50,getStat(),getStat(),getStat(),5,5,100,50);
-            Zombie zombie = new Zombie("Зомби", 1,50,getStat(),getStat(),getStat(),5,5,100,50);
-            Ogre ogre = new Ogre("Огр", 1,50,getStat(),getStat(),getStat(),5,5,100,50);
+            Skeleton skeleton = new Skeleton("Скелет", 100, 50, 5, 5, 5, 5, 10, 10);
+            Zombie zombie = new Zombie("Зомби", 100, 50, 5, 5, 5, 5, 10, 10);
+            Ogre ogre = new Ogre("Огр", 100, 50, 5, 5, 5, 5, 10, 10);
 
             int count = random.nextInt(3);
             switch (count) {
@@ -38,10 +39,10 @@ public class GeneratorUnits {
         return poll;
     }
 
-    private int getStat(){
+    private int getStat() {
         int sumStats = (hero.agility + hero.luck + hero.power) / 3;
         int stat = random.nextInt(sumStats);
-        if(stat == 0)
+        if (stat == 0)
             stat = 1;
         return stat;
     }
