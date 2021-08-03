@@ -7,20 +7,49 @@ abstract public class CombatUnit extends Unit {
     public static final int LUCK = 5;
     public static final int DAMAGE = 5;
     public static final int DEFENCE = 5;
+    public static final int LEVEL = 1;
 
     protected int power;
     protected int agility;
     protected int luck;
     protected int damage;
     protected int defence;
+    protected int level;
 
-    protected CombatUnit(String name, int health, int gold, int experience, int power, int agility, int luck, int damage, int defence) {
+    protected CombatUnit(String name, int health, int gold, int experience, int power, int agility, int luck,
+                         int damage, int defence, int level) {
         super(name, health, gold, experience);
         this.power = power;
         this.agility = agility;
         this.luck = luck;
         this.damage = damage;
         this.defence = defence;
+        this.level = level;
+    }
+
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    @Override
+    public String toString() {
+        return "CombatUnit{" +
+                "power=" + power +
+                ", agility=" + agility +
+                ", luck=" + luck +
+                ", damage=" + damage +
+                ", defence=" + defence +
+                ", level=" + level +
+                ", name='" + name + '\'' +
+                ", health=" + health +
+                ", gold=" + gold +
+                ", experience=" + experience +
+                "}\n";
     }
 
     public abstract int attack();
