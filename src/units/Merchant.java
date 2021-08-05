@@ -13,7 +13,7 @@ public class Merchant extends Unit {
         return listOfGood;
     }
 
-    enum Goods {
+    public enum Goods {
 
         POTION25(25, 25),
         POTION50(50, 50),
@@ -34,8 +34,6 @@ public class Merchant extends Unit {
             return price;
         }
     }
-
-
 
     @Override
     public String toString() {

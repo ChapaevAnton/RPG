@@ -7,10 +7,17 @@ public class Main {
     public static void main(String[] args) {
         Merchant merch = new Merchant("Bob", 150, 2500, 0);
         System.out.println(merch);
-        System.out.println(merch.getListOfGood());
+//        System.out.println(merch.getListOfGood());
 
-//        Hero hero = new Hero("Дзюба", 1, 500, 50, 0, 0, 20, 20,
-//                20, 10, 10);
+        Hero hero = new Hero("Дзюба", 1, 500, 500, 0, 0, 20, 20,
+                20, 10, 10);
+
+        Trade trade = new Trade(hero, merch);
+        trade.getGoodType(2);
+        System.out.println(merch); // check gold for merch and hero
+        System.out.println(hero.getGold());
+        System.out.println(hero);
+
 //        hero.setLevel(7);
 //        GeneratorUnits generatorUnits = new GeneratorUnits(hero);
 //        List<Monster> listMonster = generatorUnits.generateMonsters();
