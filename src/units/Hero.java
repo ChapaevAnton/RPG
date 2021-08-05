@@ -5,8 +5,6 @@ import java.util.Random;
 public class Hero extends CombatUnit {
 
     public static final int LEVEL = 1;
-
-
     protected int kill;//количество убитых
     //спосбоность
     //снарежение
@@ -19,14 +17,15 @@ public class Hero extends CombatUnit {
     }
 
 
+
     // TODO: 31.07.2021 add sword attack
     @Override
     public int attack() {
-        int chance = new Random().nextInt(9);
-        if (chance + luck / 5 > 6) {
-            return (DAMAGE + (damage * power / 3)) * 2;
+        int chance = new Random().nextInt(10) + 1;
+        if (chance + luck / 5 > 7) {
+            return (int)(damage * 1.5);
         } else {
-            return DAMAGE + (damage * power / 3);
+            return damage;
         }
 
     }
@@ -34,6 +33,6 @@ public class Hero extends CombatUnit {
     // TODO: 31.07.2021 add shield defense
     @Override
     public int defence() {
-        return DEFENCE + (defence * agility / 5);
+        return defence;
     }
 }

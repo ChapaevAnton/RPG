@@ -38,18 +38,9 @@ abstract public class CombatUnit extends Unit {
 
     @Override
     public String toString() {
-        return "CombatUnit{" +
-                "power=" + power +
-                ", agility=" + agility +
-                ", luck=" + luck +
-                ", damage=" + damage +
-                ", defence=" + defence +
-                ", level=" + level +
-                ", name='" + name + '\'' +
-                ", health=" + health +
-                ", gold=" + gold +
-                ", experience=" + experience +
-                "}\n";
+        return  name +
+                ", lvl=" + level +
+                ", HP=" + health;
     }
 
     public abstract int attack();

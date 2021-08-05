@@ -1,27 +1,23 @@
-import units.GeneratorUnits;
-import units.Hero;
-import units.Monster;
-import units.Skeleton;
+import units.*;
 
 import java.util.List;
 
 public class Main {
 
     public static void main(String[] args) {
-
-        Hero hero = new Hero("Дзюба", 1, 100, 50, 0, 0, 5, 5, 5, 10, 10);
-        hero.setLevel(5);
-
+        Merchant merch = new Merchant("Bob", 150, 2500, 0);
+        System.out.println(merch);
+        Hero hero = new Hero("Дзюба", 1, 1, 50, 0, 0, 0, 0,
+                0, 0, 0);
+        hero.setLevel(7);
         GeneratorUnits generatorUnits = new GeneratorUnits(hero);
         List<Monster> listMonster = generatorUnits.generateMonsters();
+        generatorUnits.generateHero();
+
         System.out.println(listMonster);
         System.out.println(listMonster.size());
 
-
-//        Combat combat = new Combat(hero,skeleton);
-//        combat.combat();
-
-
-
+        Combat combat = new Combat(hero,listMonster);
+        combat.combat();
     }
 }
