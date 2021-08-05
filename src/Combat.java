@@ -30,6 +30,7 @@ public class Combat {
                 } else {
                     for (Monster monster : monsters) {
                         if (hero.getHealth() <= 0) {
+                            System.out.println("конец боя...");
                             break;
                         }
                         isFight = fight(monster, hero);
@@ -41,9 +42,6 @@ public class Combat {
     }
 
     private boolean fight(CombatUnit attacker, CombatUnit defender) {
-
-        if (hero.getHealth() <= 0) return false;
-
         int damage = (attacker.attack() - defender.defence());
         if(damage < 0){
             damage = 0;

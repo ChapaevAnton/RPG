@@ -13,9 +13,7 @@ public class Hero extends CombatUnit {
                 int power, int agility, int luck, int damage, int defence) {
         super(name, health, gold, experience, power, agility, luck, damage, defence, level);
         this.kill = kill;
-
     }
-
 
 
     // TODO: 31.07.2021 add sword attack
@@ -27,7 +25,6 @@ public class Hero extends CombatUnit {
         } else {
             return damage;
         }
-
     }
 
     // TODO: 31.07.2021 add shield defense
