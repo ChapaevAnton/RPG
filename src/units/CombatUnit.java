@@ -1,5 +1,8 @@
 package units;
 
+import equipments.Armour;
+import equipments.Weapon;
+
 abstract public class CombatUnit extends Unit {
 
     public static final int POWER = 5;
@@ -16,6 +19,9 @@ abstract public class CombatUnit extends Unit {
     protected int defence;
     protected int level;
 
+    protected Weapon weapon;
+    protected Armour armour;
+
     protected CombatUnit(String name, int health, int gold, int experience, int power, int agility, int luck,
                          int damage, int defence, int level) {
         super(name, health, gold, experience);
@@ -27,6 +33,21 @@ abstract public class CombatUnit extends Unit {
         this.level = level;
     }
 
+    public int getDamage() {
+        return damage;
+    }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
+
+    public int getDefence() {
+        return defence;
+    }
+
+    public void setDefence(int defence) {
+        this.defence = defence;
+    }
 
     public int getLevel() {
         return level;
@@ -36,9 +57,37 @@ abstract public class CombatUnit extends Unit {
         this.level = level;
     }
 
+    public Weapon getWeapon() {
+        return weapon;
+    }
+
+    public void setWeapon(Weapon weapon) {
+        this.weapon = weapon;
+    }
+
+    public Armour getArmour() {
+        return armour;
+    }
+
+    public void setArmour(Armour armour) {
+        this.armour = armour;
+    }
+
+    public int getTotalDamage() {
+        int totalDamage = getDamage();
+        totalDamage += weapon == null ? 0 : weapon.getDamage();
+        return totalDamage;
+    }
+
+    public int getTotalDefence() {
+        int totalDefence = getDefence();
+        totalDefence += armour == null ? 0 : armour.getDefence();
+        return totalDefence;
+    }
+
     @Override
     public String toString() {
-        return  name +
+        return name +
                 ", lvl=" + level +
                 ", HP=" + health;
     }

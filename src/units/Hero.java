@@ -16,20 +16,18 @@ public class Hero extends CombatUnit {
     }
 
 
-    // TODO: 31.07.2021 add sword attack
     @Override
     public int attack() {
         int chance = new Random().nextInt(10) + 1;
         if (chance + luck / 5 > 7) {
-            return (int)(damage * 1.5);
+            return (int)(getTotalDamage() * 1.5);
         } else {
-            return damage;
+            return getTotalDamage();
         }
     }
 
-    // TODO: 31.07.2021 add shield defense
     @Override
     public int defence() {
-        return defence;
+        return getTotalDefence();
     }
 }
