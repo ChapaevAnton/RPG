@@ -15,41 +15,45 @@ public class Combat {
         this.hero = hero;
         this.monsters = monsters;
     }
+
     Random random = new Random();
 
-    public void combat() {
+    public void turn() {
         int counter = 0;
         do {
             int randomMonster = random.nextInt(monsters.size());
-                if (counter % 2 == 0) {
-                    isFight = strike(hero, monsters.get(randomMonster));
-                } else {
-                    for (Monster monster : monsters) {
-                        if(!monsters.get(randomMonster).isAlive()) continue;
-                        isFight = strike(monster, hero);
-                    }
+            if (counter % 2 == 0) {
+                isFight = strike(hero, monsters.get(randomMonster));
+            } else {
+                isFight = strike(hero, monsters);
             }
             counter++;
         } while (isFight);
     }
 
-    public boolean victory(){
-        int count = 0;
-        if (!hero.isAlive()) {
-            System.out.println("конец боя...");
-            return false;
-        }
-        for(int i = 0; i < monsters.size(); i++){
-            if(!monsters.get(i).isAlive()){
-                count++;
+
+    private boolean isAliveMonsters() {
+        return monsters.stream().anyMatch(CombatUnit::isAlive);
+    }
+
+
+    public boolean strike(CombatUnit defender, List<Monster> attacker) {
+
+        boolean isCombat = false;
+        do {
+
+            for (CombatUnit monster : monsters) {
+                if (monster.isAlive()) isCombat = strike(monster, hero) && isAliveMonsters();
             }
-        }
-        if(count != monsters.size()) return true;
+
+        } while (isCombat);
+
+        return isCombat;
     }
 
     private boolean strike(CombatUnit attacker, CombatUnit defender) {
         int damage = (attacker.attack() - defender.defence());
-        if(damage < 0){
+        if (damage < 0) {
             damage = 0;
         }
         if (damage <= defender.getHealth()) {

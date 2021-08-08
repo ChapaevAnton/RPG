@@ -12,8 +12,8 @@ public class Main {
 //        System.out.println(merch);
 //        System.out.println(merch.getListOfGood());
 
-        Hero hero = new Hero("Дзюба", 1, 500, 500, 0, 0, 20, 20,
-                20, 10, 10);
+        Hero hero = new Hero("Дзюба", 100, 500, 500, 0, 20, 20, 20,
+                20, 10, 5);
 
         Armour armour = new Armour("Buckler");
         armour.setDefence(10);
@@ -36,11 +36,11 @@ public class Main {
         GeneratorUnits generatorUnits = new GeneratorUnits(hero);
         List<Monster> listMonster = generatorUnits.generateMonsters();
 
-        System.out.println(listMonster);
+//        System.out.println(listMonster.stream().anyMatch(CombatUnit::isAlive));
 //        System.out.println(listMonster.size());
 //
-//        Combat combat = new Combat(hero, listMonster);
-//        combat.combat();
+        Combat combat = new Combat(hero,  listMonster);
+        combat.turn();
 
 
 
