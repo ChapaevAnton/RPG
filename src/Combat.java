@@ -37,7 +37,6 @@ public class Combat {
         } while (isAliveMonsters() && hero.isAlive());
     }
 
-
     private boolean isAliveMonsters() {
         return monsters.stream().anyMatch(CombatUnit::isAlive);
     }
@@ -50,6 +49,16 @@ public class Combat {
         //если attacker жив он атакует defender
         attackers.stream().filter(CombatUnit::isAlive).forEach(attacker -> strike(attacker, defender));
 
+        //классический вариант
+//        for (CombatUnit attacker : attackers) {
+//            if (!attacker.isAlive()) deathToll.add(attacker);
+//        }
+//
+//        attackers.removeIf(attacker -> !attacker.isAlive());
+//
+//        for (CombatUnit attacker : attackers) {
+//            if (attacker.isAlive()) strike(attacker, defender);
+//        }
     }
 
     private void strike(CombatUnit attacker, CombatUnit defender) {
