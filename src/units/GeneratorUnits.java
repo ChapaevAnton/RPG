@@ -5,38 +5,38 @@ import java.util.List;
 import java.util.Random;
 
 public class GeneratorUnits {
-    private Hero hero;
+    private final Hero hero;
 
     public GeneratorUnits(Hero hero) {
         this.hero = hero;
     }
 
-    private Random random = new Random();
+    private final Random random = new Random();
 
-    public List<Monster> generateMonsters() {
+    public List<CombatUnit> generateMonsters() {
 
-        List<Monster> poll = new ArrayList();
+        List<CombatUnit> poll = new ArrayList<>();
         List<Integer> levelsList = getMonsterLevel();
-        for (int i = 0; i < levelsList.size(); i++) {
+        for (Integer integer : levelsList) {
             int count = random.nextInt(3);
             switch (count) {
                 case 0 -> {
-                    Skeleton skeleton = new Skeleton("Скелет", 0, 50, 50,
-                            0, 0, 0, 0, 0, levelsList.get(i));
+                    CombatUnit skeleton = new Skeleton("Скелет", 0, 50, 50,
+                            0, 0, 0, 0, 0, integer);
                     setMonsterStats(skeleton);
                     setMonsterName(skeleton);
                     poll.add(skeleton);
                 }
                 case 1 -> {
-                    Zombie zombie = new Zombie("Зомби", 0, 50, 50,
-                            0, 0, 0, 0, 0, levelsList.get(i));
+                    CombatUnit zombie = new Zombie("Зомби", 0, 50, 50,
+                            0, 0, 0, 0, 0, integer);
                     setMonsterStats(zombie);
                     setMonsterName(zombie);
                     poll.add(zombie);
                 }
                 case 2 -> {
-                    Ogre ogre = new Ogre("Огр", 0, 50, 50,
-                            0, 0, 0, 0, 0, levelsList.get(i));
+                    CombatUnit ogre = new Ogre("Огр", 0, 50, 50,
+                            0, 0, 0, 0, 0, integer);
                     setMonsterStats(ogre);
                     setMonsterName(ogre);
                     poll.add(ogre);
@@ -57,7 +57,7 @@ public class GeneratorUnits {
         return enemiesLvl;
     }
 
-    private void setMonsterStats(Monster monster) {
+    private void setMonsterStats(CombatUnit monster) {
         if (monster instanceof Skeleton) {
             monster.agility = CombatUnit.AGILITY + monster.level + 2;
             monster.power = CombatUnit.POWER + monster.level;
@@ -70,7 +70,7 @@ public class GeneratorUnits {
     }
 
 
-    private void setMonsterName(Monster monster) {
+    private void setMonsterName(CombatUnit monster) {
         String name;
 
         Random random = new Random();

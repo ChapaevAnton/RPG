@@ -1,6 +1,4 @@
 import equipments.Armour;
-import equipments.Equipment;
-import equipments.Weapon;
 import units.*;
 
 import java.util.List;
@@ -13,7 +11,7 @@ public class Main {
 //        System.out.println(merch.getListOfGood());
 
         Hero hero = new Hero("Дзюба", 100, 500, 500, 0, 20, 20, 20,
-                20, 10, 5);
+                20, 10, 2);
 
         Armour armour = new Armour("Buckler");
         armour.setDefence(10);
@@ -32,16 +30,22 @@ public class Main {
 //        System.out.println(hero.getGold());
 //        System.out.println(hero);
 
-        hero.setLevel(7);
+
         GeneratorUnits generatorUnits = new GeneratorUnits(hero);
-        List<Monster> listMonster = generatorUnits.generateMonsters();
+        List<CombatUnit> listMonster = generatorUnits.generateMonsters();
+
+        listMonster.clear();
+        listMonster.add(new Skeleton("Скелет1", 100, 50, 50,
+                20, 0, 0, 0, 0, 1));
+        listMonster.add(new Skeleton("Скелет2", 70, 50, 50,
+                40, 0, 0, 0, 0, 1));
 
 //        System.out.println(listMonster.stream().anyMatch(CombatUnit::isAlive));
+
 //        System.out.println(listMonster.size());
 //
-        Combat combat = new Combat(hero,  listMonster);
+        Combat combat = new Combat(hero, listMonster);
         combat.turn();
-
 
 
     }
