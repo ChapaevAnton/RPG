@@ -1,8 +1,6 @@
 import units.Hero;
 import units.Merchant;
 
-import java.util.Scanner;
-
 public class Trade {
     private Hero hero;
     private Merchant merch;

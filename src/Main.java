@@ -32,11 +32,11 @@ public class Main {
 //        System.out.println(hero.getGold());
 //        System.out.println(hero);
 
-//        hero.setLevel(7);
-//        GeneratorUnits generatorUnits = new GeneratorUnits(hero);
-//        List<Monster> listMonster = generatorUnits.generateMonsters();
-//
-//        System.out.println(listMonster);
+        hero.setLevel(7);
+        GeneratorUnits generatorUnits = new GeneratorUnits(hero);
+        List<Monster> listMonster = generatorUnits.generateMonsters();
+
+        System.out.println(listMonster);
 //        System.out.println(listMonster.size());
 //
 //        Combat combat = new Combat(hero, listMonster);
