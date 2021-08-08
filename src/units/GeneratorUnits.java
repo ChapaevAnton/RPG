@@ -66,11 +66,7 @@ public class GeneratorUnits {
             monster.power = CombatUnit.POWER + monster.level + 2;
         }
         monster.luck = CombatUnit.LUCK + monster.level;
-
-        //TODO create method for these parameters
-        monster.health = CombatUnit.HEALTH + monster.level * 25;
-        monster.damage = CombatUnit.DAMAGE + monster.level + 5 + monster.power;
-        monster.defence = CombatUnit.DEFENCE + monster.level + monster.agility / 5;
+        monster.health = CombatUnit.HEALTH + monster.level * monster.power;
     }
 
 

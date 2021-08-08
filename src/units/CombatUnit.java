@@ -19,11 +19,12 @@ abstract public class CombatUnit extends Unit {
     protected int defence;
     protected int level;
 
+
     protected Weapon weapon;
     protected Armour armour;
 
-    protected CombatUnit(String name, int health, int gold, int experience, int power, int agility, int luck,
-                         int damage, int defence, int level) {
+    public CombatUnit(String name, int health, int gold, int experience,
+                      int power, int agility, int luck, int damage, int defence, int level) {
         super(name, health, gold, experience);
         this.power = power;
         this.agility = agility;
@@ -31,6 +32,10 @@ abstract public class CombatUnit extends Unit {
         this.damage = damage;
         this.defence = defence;
         this.level = level;
+    }
+
+    public boolean isAlive(){
+        return getHealth() > 0;
     }
 
     public int getDamage() {

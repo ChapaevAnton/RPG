@@ -20,28 +20,34 @@ public class Combat {
     public void combat() {
         int counter = 0;
         do {
-            if(monsters.size() == 0){
-                System.out.println("Победа! " + hero.getName() + " победил!");
-                break;
-            }
             int randomMonster = random.nextInt(monsters.size());
                 if (counter % 2 == 0) {
-                    isFight = fight(hero, monsters.get(randomMonster));
+                    isFight = strike(hero, monsters.get(randomMonster));
                 } else {
                     for (Monster monster : monsters) {
-                        if (hero.getHealth() <= 0) {
-                            System.out.println("конец боя...");
-                            break;
-                        }
-                        isFight = fight(monster, hero);
+                        if(!monsters.get(randomMonster).isAlive()) continue;
+                        isFight = strike(monster, hero);
                     }
             }
             counter++;
-
         } while (isFight);
     }
 
-    private boolean fight(CombatUnit attacker, CombatUnit defender) {
+    public boolean victory(){
+        int count = 0;
+        if (!hero.isAlive()) {
+            System.out.println("конец боя...");
+            return false;
+        }
+        for(int i = 0; i < monsters.size(); i++){
+            if(!monsters.get(i).isAlive()){
+                count++;
+            }
+        }
+        if(count != monsters.size()) return true;
+    }
+
+    private boolean strike(CombatUnit attacker, CombatUnit defender) {
         int damage = (attacker.attack() - defender.defence());
         if(damage < 0){
             damage = 0;
@@ -53,14 +59,7 @@ public class Combat {
         } else {
             defender.setHealth(0);
             System.out.println(attacker + " ударил на " + damage + " урона " + defender + ". " + defender + " погибает.");
-            if(defender == hero){
-                System.out.println("конец боя...");
-                return false;
-            } else {
-                monsters.remove(defender);
-                return true;
-            }
-
+            return false;
         }
 
     }
