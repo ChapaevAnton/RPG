@@ -6,6 +6,7 @@ public class Hero extends CombatUnit {
 
     public static final int LEVEL = 1;
     protected int kill;//количество убитых
+    //спосбоность
 
     public Hero(String name, int health, int gold, int experience, int kill, int power, int agility, int luck,
                 int damage, int defence, int level) {
@@ -20,16 +21,13 @@ public class Hero extends CombatUnit {
     public void setKill(int kill) {
         this.kill = kill;
     }
-    //спосбоность
-
-
 
     @Override
     public int attack() {
         int chance = new Random().nextInt(10) + 1;
         damage = DAMAGE + level + 5 + power;
         if (chance + luck / 5 > 7) {
-            return (int)(getTotalDamage() * 1.5);
+            return (int) (getTotalDamage() * 1.5);
         } else {
             return getTotalDamage();
         }
@@ -39,5 +37,25 @@ public class Hero extends CombatUnit {
     public int defence() {
         defence = DEFENCE + level + agility / 5;
         return getTotalDefence();
+    }
+
+
+    public String getInfoFull() {
+        return "Hero -> \n" +
+                "  name='" + name +
+                ", level=" + level +
+                ", health=" + health +
+                ", kill=" + kill +
+                ", experience=" + experience +
+                ", gold=" + gold + "\n" +
+                "  power=" + power +
+                ", agility=" + agility +
+                ", luck=" + luck + "\n" +
+                "  damage=" + damage +
+                ", defence=" + defence +
+                ", weapon=" + weapon +
+                ", armour=" + armour;
+
+
     }
 }

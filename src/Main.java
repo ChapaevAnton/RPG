@@ -10,8 +10,10 @@ public class Main {
 //        System.out.println(merch);
 //        System.out.println(merch.getListOfGood());
 
-        Hero hero = new Hero("Дзюба", 100, 500, 500, 0, 20, 20, 20,
+        Hero hero = new Hero("Дзюба", 1000, 500, 500, 0, 20, 20, 20,
                 20, 10, 2);
+
+        System.out.println(hero.getInfoFull());
 
         Armour armour = new Armour("Buckler");
         armour.setDefence(10);
@@ -45,8 +47,10 @@ public class Main {
 //        System.out.println(listMonster.size());
 //
         Battle battle = new Battle(hero, listMonster);
-        //combat.turn();
+        battle.fight();
 
+        System.out.println(battle.getDeathToll());
+        System.out.println(hero.getInfoFull());
 
     }
 }
