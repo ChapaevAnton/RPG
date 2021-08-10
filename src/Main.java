@@ -44,8 +44,8 @@ public class Main {
 
 //        System.out.println(listMonster.size());
 //
-        Combat combat = new Combat(hero, listMonster);
-        combat.turn();
+        Battle battle = new Battle(hero, listMonster);
+        //combat.turn();
 
 
     }

@@ -6,14 +6,14 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-public class Combat {
+public class Battle {
 
     private final Hero hero;
     private final List<CombatUnit> monsters;
     private final List<CombatUnit> deathToll;
     private final Random random = new Random();
 
-    public Combat(Hero hero, List<CombatUnit> monsters) {
+    public Battle(Hero hero, List<CombatUnit> monsters) {
         this.hero = hero;
         this.monsters = monsters;
         this.deathToll = new ArrayList<>();
@@ -23,7 +23,21 @@ public class Combat {
         return deathToll;
     }
 
-    public void turn() {
+    public void fight(){
+
+        if(turn()){
+            System.out.println("Герой победил");
+            // TODO: 10.08.2021 начисляем эксприен и золото
+
+
+        } else {
+            System.out.println("Герой проиграл");
+            // TODO: 10.08.2021 game over
+        }
+
+    }
+
+    private boolean turn() {
         int counter = 0;
 
         do {
@@ -35,6 +49,8 @@ public class Combat {
             }
             counter++;
         } while (isAliveMonsters() && hero.isAlive());
+
+        return hero.isAlive();
     }
 
     private boolean isAliveMonsters() {
