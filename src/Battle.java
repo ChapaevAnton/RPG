@@ -91,4 +91,14 @@ public class Battle {
         }
     }
 
+    private void levelUp(){
+        int lvlUpThreshold = 100;
+        lvlUpThreshold = (int)(lvlUpThreshold + 0.75 * lvlUpThreshold * hero.getLevel());
+        if(hero.getExperience() > lvlUpThreshold){
+            hero.setExperience(hero.getExperience() - lvlUpThreshold);
+            hero.setLevel(hero.getLevel() + 1);
+            System.out.println("Уровень повышен! Текущий уровень :" + hero.getLevel());
+        }
+    }
+
 }
