@@ -6,6 +6,7 @@ public class Hero extends CombatUnit {
 
     public static final int LEVEL = 1;
     protected int kill;//количество убитых
+    public static final int BASE_EXPERIENCE = 100;
     //спосбоность
 
     public Hero(String name, int health, int gold, int experience, int kill, int power, int agility, int luck,

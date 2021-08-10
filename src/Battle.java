@@ -38,6 +38,7 @@ public class Battle {
             hero.setGold(hero.getGold() + totalGold);
             hero.setExperience(hero.getExperience() + totalExp);
             hero.setKill(hero.getKill() + totalKills);
+            getExp();
 
         } else {
             System.out.println("Герой проиграл");
@@ -96,14 +97,29 @@ public class Battle {
         }
     }
 
-    private void levelUp(){
-        int lvlUpThreshold = 100;
-        lvlUpThreshold = (int)(lvlUpThreshold + 0.75 * lvlUpThreshold * hero.getLevel());
-        if(hero.getExperience() > lvlUpThreshold){
-            hero.setExperience(hero.getExperience() - lvlUpThreshold);
-            hero.setLevel(hero.getLevel() + 1);
+//    private void levelUp(){
+//        int lvlUpThreshold = 100;
+//        lvlUpThreshold = (int)(lvlUpThreshold + 0.75 * lvlUpThreshold * hero.getLevel());
+//        if(hero.getExperience() > lvlUpThreshold){
+//            hero.setExperience(hero.getExperience() - lvlUpThreshold);
+//            hero.setLevel(hero.getLevel() + 1);
+//            System.out.println("Уровень повышен! Текущий уровень :" + hero.getLevel());
+//            System.out.println(lvlUpThreshold);
+//        }
+//    }
+
+    private void getExp(){
+        int lvlUpThreshold = 0;
+        while(hero.getExperience() > lvlUpThreshold){
+            for(int i = 0; i < hero.getLevel(); i++){
+                lvlUpThreshold = (int)(Hero.BASE_EXPERIENCE + 0.75 * Hero.BASE_EXPERIENCE * hero.getLevel());
+                hero.setExperience(hero.getExperience() - lvlUpThreshold);
+                hero.setLevel(hero.getLevel() + 1);
+                System.out.println(lvlUpThreshold);
+            }
             System.out.println("Уровень повышен! Текущий уровень :" + hero.getLevel());
         }
+
     }
 
 }

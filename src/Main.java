@@ -10,7 +10,7 @@ public class Main {
 //        System.out.println(merch);
 //        System.out.println(merch.getListOfGood());
 
-        Hero hero = new Hero("Дзюба", 1000, 500, 500, 0, 20, 20, 20,
+        Hero hero = new Hero("Дзюба", 1000, 500, 0, 0, 20, 20, 20,
                 20, 10, 2);
 
         System.out.println(hero.getInfoFull());
@@ -37,9 +37,9 @@ public class Main {
         List<CombatUnit> listMonster = generatorUnits.generateMonsters();
 
         listMonster.clear();
-        listMonster.add(new Skeleton("Скелет1", 100, 50, 50,
+        listMonster.add(new Skeleton("Скелет1", 100, 50, 200,
                 20, 0, 0, 0, 0, 1));
-        listMonster.add(new Skeleton("Скелет2", 70, 50, 50,
+        listMonster.add(new Skeleton("Скелет2", 70, 50, 200,
                 40, 0, 0, 0, 0, 1));
 
 //        System.out.println(listMonster.stream().anyMatch(CombatUnit::isAlive));
