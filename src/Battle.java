@@ -108,14 +108,16 @@ public class Battle {
 //        while(hero.getExperience() > lvlUpThreshold){                   //condition was replaced to "for" loop
             for(int i = 0; i < hero.getLevel(); i++){
                 lvlUpThreshold = (int)(Hero.BASE_EXPERIENCE + 0.75 * Hero.BASE_EXPERIENCE * hero.getLevel());
+                if(hero.getExperience() < lvlUpThreshold){                  //placed break condition here
+                                                                            //cuz it prevents next action, but provides caculation of threshold
+                    break;
+                }
                 hero.setExperience(hero.getExperience() - lvlUpThreshold);
                 hero.setLevel(hero.getLevel() + 1);
                 System.out.println(lvlUpThreshold);
                 System.out.println(hero.getExperience());
                 System.out.println("Уровень повышен! Текущий уровень :" + hero.getLevel());
-                if(hero.getExperience() < lvlUpThreshold){
-                    break;
-                }
+
             }
 
 //        }

@@ -17,7 +17,7 @@ public class Main {
 
 
         Hero hero = new Hero("Дзюба", 1000, 500, 0, 0, 20, 20, 20,
-                20, 10, 2);
+                20, 10, 1);
 
         System.out.println(hero.getInfoFull());
 
