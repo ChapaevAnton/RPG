@@ -9,6 +9,11 @@ public class Hero extends CombatUnit {
     public static final int BASE_EXPERIENCE = 100;
     //спосбоность
 
+    public Hero(String name, int power){
+        super(name, HEALTH, GOLD, EXPERIENCE, power, AGILITY, LUCK, DAMAGE, DEFENCE, LEVEL);
+        this.kill = 0;
+    }
+
     public Hero(String name, int health, int gold, int experience, int kill, int power, int agility, int luck,
                 int damage, int defence, int level) {
         super(name, health, gold, experience, power, agility, luck, damage, defence, level);

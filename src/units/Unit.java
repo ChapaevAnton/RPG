@@ -3,8 +3,8 @@ package units;
 public abstract class Unit {
 
 
-    public static final int HEALTH = 100;
-    public static final int EXPERIENCE = 0;
+    public static final int HEALTH = 200;
+    public static final int EXPERIENCE = 50;
     public static final int GOLD = 50;
 
     protected String name;

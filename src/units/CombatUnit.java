@@ -23,6 +23,30 @@ abstract public class CombatUnit extends Unit {
     protected Weapon weapon;
     protected Armour armour;
 
+    public int getPower() {
+        return power;
+    }
+
+    public void setPower(int power) {
+        this.power = power;
+    }
+
+    public int getAgility() {
+        return agility;
+    }
+
+    public void setAgility(int agility) {
+        this.agility = agility;
+    }
+
+    public int getLuck() {
+        return luck;
+    }
+
+    public void setLuck(int luck) {
+        this.luck = luck;
+    }
+
     public CombatUnit(String name, int health, int gold, int experience,
                       int power, int agility, int luck, int damage, int defence, int level) {
         super(name, health, gold, experience);

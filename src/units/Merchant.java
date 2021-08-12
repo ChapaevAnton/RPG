@@ -14,7 +14,6 @@ public class Merchant extends Unit {
     }
 
     public enum Goods {
-
         POTION25(25, 25),
         POTION50(50, 50),
         POTION100(100, 100);
@@ -25,11 +24,9 @@ public class Merchant extends Unit {
             this.point = point;
             this.price = price;
         }
-
         public int getPoint() {
             return point;
         }
-
         public int getPrice() {
             return price;
         }

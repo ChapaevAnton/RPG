@@ -1,3 +1,4 @@
+import org.w3c.dom.ls.LSOutput;
 import units.CombatUnit;
 import units.Hero;
 
@@ -38,7 +39,7 @@ public class Battle {
             hero.setGold(hero.getGold() + totalGold);
             hero.setExperience(hero.getExperience() + totalExp);
             hero.setKill(hero.getKill() + totalKills);
-            getExp();
+            levelUp();
 
         } else {
             System.out.println(hero.getName() + " проиграл");
@@ -69,6 +70,7 @@ public class Battle {
     private void killCount() {
         //добавляем убитых attackers в список убитых
         deathToll.addAll(monsters.stream().filter(combatUnit -> !combatUnit.isAlive()).collect(Collectors.toList()));
+
         //убираем с поля боя убитых attackers
         monsters.removeIf(attacker -> !attacker.isAlive());
     }
@@ -80,8 +82,11 @@ public class Battle {
 
     private void strike(CombatUnit attacker, CombatUnit defender) {
         int damage = (attacker.attack() - defender.defence());
-        if (damage < 0) {
+        if (damage < -5) {
+            System.out.println("Промах!");
+        } else if(damage <= 0){
             damage = 0;
+            System.out.println("Не пробил");
         }
         if (damage <= defender.getHealth()) {
             defender.setHealth(defender.getHealth() - damage);
@@ -92,8 +97,24 @@ public class Battle {
         }
     }
 
-//    private void levelUp(){
-//        int lvlUpThreshold = 100;
+
+//    int attack = attackUnit.attack() + attackUnit.getSword();
+//    int defence = defenceUnit.defence() + defenceUnit.getShield();
+//    int damageHit = attack - defence;
+//
+//    if (damageHit < -10) {
+//        attackUnit.setHealth(attackUnit.getHealth() + damageHit);
+//        System.out.println("\u2694" + attackUnit + " нанеся слабый удар не пробил броню " + defenceUnit + ", при это раня себя на " + damageHit + " очков урона");
+//    } else if (damageHit <= 0) {
+//        defenceUnit.setHealth(defenceUnit.getHealth());
+//        System.out.println("\u2699" + attackUnit + " нанося удар и промахнулся по " + defenceUnit);
+//    } else {
+//        defenceUnit.setHealth(defenceUnit.getHealth() - damageHit);
+//        System.out.println("\u2694" + attackUnit + " нанес удар в " + damageHit + " очков урона, по " + defenceUnit);
+//    }
+
+//    private void instantGetExp(){
+//        int lvlUpThreshold = 0;
 //        lvlUpThreshold = (int)(lvlUpThreshold + 0.75 * lvlUpThreshold * hero.getLevel());
 //        if(hero.getExperience() > lvlUpThreshold){
 //            hero.setExperience(hero.getExperience() - lvlUpThreshold);
@@ -103,25 +124,38 @@ public class Battle {
 //        }
 //    }
 
-    private void getExp(){
+    private void levelUp(){
         int lvlUpThreshold = 0;
-//        while(hero.getExperience() > lvlUpThreshold){                   //condition was replaced to "for" loop
             for(int i = 0; i < hero.getLevel(); i++){
                 lvlUpThreshold = (int)(Hero.BASE_EXPERIENCE + 0.75 * Hero.BASE_EXPERIENCE * hero.getLevel());
                 if(hero.getExperience() < lvlUpThreshold){                  //placed break condition here
-                                                                            //cuz it prevents next action, but provides caculation of threshold
-                    break;
+                    break;                                                  //cuz it prevents next action, but provides caculation of threshold
                 }
                 hero.setExperience(hero.getExperience() - lvlUpThreshold);
                 hero.setLevel(hero.getLevel() + 1);
-                System.out.println(lvlUpThreshold);
-                System.out.println(hero.getExperience());
+                setStats(hero.getLevel()); //power, agi, luck
+//                currentHP = hero.setHealth(); maxHP = hero.getHealth();
+                System.out.println("Exp: " + hero.getExperience() + "/" + lvlUpThreshold);
                 System.out.println("Уровень повышен! Текущий уровень :" + hero.getLevel());
-
             }
-
-//        }
-
     }
+
+    private void setStats(int level){
+        hero.setAgility((int)(hero.getAgility() + CombatUnit.AGILITY * 0.2 * level));
+        hero.setPower((int)(hero.getPower() + CombatUnit.POWER * 0.2 * level));
+        hero.setLuck((int)(hero.getLuck() + CombatUnit.LUCK * 0.2 * level));
+        hero.setHealth((hero.getHealth() + 5 * level * hero.getPower()));
+    }
+
+//    while (attackUnit.getExperience() >= Hero.LEVEL_UP) {
+//        attackUnit.setLevel(attackUnit.getLevel() + 1);
+//
+//        //рандомно увеличиваем характеристики
+//        if (Math.random() > .5) attackUnit.setForce(attackUnit.getForce() + 1);
+//        else attackUnit.setAgility(attackUnit.getAgility() + 1);
+//
+//        attackUnit.setExperience(attackUnit.getExperience() - Hero.LEVEL_UP);
+//        System.out.println("\u23EB Ваш уровень повышен!");
+//    }
 
 }

@@ -65,6 +65,8 @@ public class GeneratorUnits {
             monster.agility = CombatUnit.AGILITY + monster.level;
             monster.power = CombatUnit.POWER + monster.level + 2;
         }
+        monster.experience = (int)(Unit.EXPERIENCE * 4  + 50 * monster.level * 0.5); //TODO remove multiplier at EXPERIENCE
+        monster.gold = (int)(Unit.GOLD  + 50 * monster.level * 0.5);
         monster.luck = CombatUnit.LUCK + monster.level;
         monster.health = CombatUnit.HEALTH + monster.level * monster.power;
     }

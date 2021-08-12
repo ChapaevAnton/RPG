@@ -2,7 +2,7 @@ package equipments;
 
 public class Weapon extends Equipment {
 
-    private final static int DEFAULT_DAMAGE = 1;
+    private final static int DEFAULT_DAMAGE = 4;
 
     private int damage = DEFAULT_DAMAGE;
 
