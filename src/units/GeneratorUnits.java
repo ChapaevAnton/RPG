@@ -90,4 +90,5 @@ public class GeneratorUnits {
         }
         monster.name = name + " " + monster.name;
     }
+
 }
