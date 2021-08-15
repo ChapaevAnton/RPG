@@ -11,7 +11,7 @@ abstract public class Monster extends CombatUnit {
     @Override
     public int attack() {
         int chance = new Random().nextInt(10) + 1;
-        damage = DAMAGE + level + 5 + power;
+        damage = DAMAGE + level + 5 + strength;
         if (chance + luck / 5 > 8) {
             return (int)(damage * 1.5);
         } else {

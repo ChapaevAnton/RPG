@@ -38,7 +38,6 @@ public class Battle {
             hero.setGold(hero.getGold() + totalGold);
             hero.setExperience(hero.getExperience() + totalExp);
             hero.setKill(hero.getKill() + totalKills);
-            levelUp();
 
         } else {
             System.out.println(hero.getName() + " проиграл");
@@ -58,6 +57,9 @@ public class Battle {
             }
             counter++;
             killCount();
+            if(hero.currentLevelUp()){
+                System.out.println("Уровень героя " + hero.getName() + " повышен!");
+            }
         } while (isAliveMonsters() && hero.isAlive());
         return hero.isAlive();
     }
@@ -123,27 +125,30 @@ public class Battle {
 //        }
 //    }
 
-    private void levelUp(){
-        int lvlUpThreshold = 0;
-            for(int i = 0; i < hero.getLevel(); i++){
-                lvlUpThreshold = (int)(Hero.BASE_EXPERIENCE + 0.75 * Hero.BASE_EXPERIENCE * hero.getLevel());
-                if(hero.getExperience() < lvlUpThreshold){                  //placed break condition here
-                    break;                                                  //cuz it prevents next action, but provides caculation of threshold
-                }
-                hero.setExperience(hero.getExperience() - lvlUpThreshold);
-                hero.setLevel(hero.getLevel() + 1);
-                setStats(hero.getLevel()); //power, agi, luck
-                System.out.println("Exp: " + hero.getExperience() + "/" + lvlUpThreshold);
-                System.out.println("Уровень повышен! Текущий уровень :" + hero.getLevel());
-            }
-    }
 
-    private void setStats(int level){
-        hero.setAgility((int)(hero.getAgility() + CombatUnit.AGILITY * 0.2 * level));
-        hero.setPower((int)(hero.getPower() + CombatUnit.POWER * 0.2 * level));
-        hero.setLuck((int)(hero.getLuck() + CombatUnit.LUCK * 0.2 * level));
-        hero.setHealth((hero.getHealth() + 5 * level * hero.getPower()));
-    }
+
+    //Old method of leveling up hero
+//    private void levelUp(){
+//        int lvlUpThreshold = 0;
+//            for(int i = 0; i < hero.getLevel(); i++){
+//                lvlUpThreshold = (int)(Hero.BASE_EXPERIENCE + 0.75 * Hero.BASE_EXPERIENCE * hero.getLevel());
+//                if(hero.getExperience() < lvlUpThreshold){                  //placed break condition here
+//                    break;                                                  //cuz it prevents next action, but provides caculation of threshold
+//                }
+//                hero.setExperience(hero.getExperience() - lvlUpThreshold);
+//                hero.setLevel(hero.getLevel() + 1);
+//                setStats(hero.getLevel()); //power, agi, luck
+//                System.out.println("Exp: " + hero.getExperience() + "/" + lvlUpThreshold);
+//                System.out.println("Уровень повышен! Текущий уровень :" + hero.getLevel());
+//            }
+//    }
+//
+//    private void setStats(int level){
+//        hero.setAgility((int)(hero.getAgility() + CombatUnit.AGILITY * 0.2 * level));
+//        hero.setStrength((int)(hero.getStrength() + CombatUnit.STRENGTH * 0.2 * level));
+//        hero.setLuck((int)(hero.getLuck() + CombatUnit.LUCK * 0.2 * level));
+//        hero.setHealth((hero.getHealth() + 5 * level * hero.getStrength()));
+//    }
 
 //    while (attackUnit.getExperience() >= Hero.LEVEL_UP) {
 //        attackUnit.setLevel(attackUnit.getLevel() + 1);

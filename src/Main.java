@@ -1,6 +1,9 @@
 import equipments.Armour;
 import equipments.Weapon;
-import units.*;
+import units.CombatUnit;
+import units.GeneratorUnits;
+import units.Hero;
+import units.Skeleton;
 
 import java.util.List;
 
@@ -17,7 +20,7 @@ public class Main {
 //        System.out.println(hero);
 
 
-        Hero hero = new Hero("Дзюба", 5);
+        Hero hero = new Hero("Дзюба", 20);
 
 
         System.out.println(hero.getInfoFull());
@@ -36,11 +39,11 @@ public class Main {
         GeneratorUnits generatorUnits = new GeneratorUnits(hero);
         List<CombatUnit> listMonster = generatorUnits.generateMonsters();
 
-//        listMonster.clear();
-//        listMonster.add(new Skeleton("Скелет1", 100, 50, 200,
-//                20, 0, 0, 0, 0, 1));
-//        listMonster.add(new Skeleton("Скелет2", 70, 50, 200,
-//                40, 0, 0, 0, 0, 1));
+        listMonster.clear();
+        listMonster.add(new Skeleton("Скелет1", 100, 50, 200,
+               20, 0, 0, 0, 0, 1));
+        listMonster.add(new Skeleton("Скелет2", 70, 50, 200,
+                40, 0, 0, 0, 0, 1));
 
 //        System.out.println(listMonster.stream().anyMatch(CombatUnit::isAlive));   //test for alive monsters
 

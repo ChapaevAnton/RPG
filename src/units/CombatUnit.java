@@ -5,14 +5,14 @@ import equipments.Weapon;
 
 abstract public class CombatUnit extends Unit {
 
-    public static final int POWER = 5;
+    public static final int STRENGTH = 5;
     public static final int AGILITY = 5;
     public static final int LUCK = 5;
     public static final int DAMAGE = 5;
     public static final int DEFENCE = 5;
     public static final int LEVEL = 1;
 
-    protected int power;
+    protected int strength;
     protected int agility;
     protected int luck;
     protected int damage;
@@ -23,12 +23,12 @@ abstract public class CombatUnit extends Unit {
     protected Weapon weapon;
     protected Armour armour;
 
-    public int getPower() {
-        return power;
+    public int getStrength() {
+        return strength;
     }
 
-    public void setPower(int power) {
-        this.power = power;
+    public void setStrength(int strength) {
+        this.strength = strength;
     }
 
     public int getAgility() {
@@ -50,7 +50,7 @@ abstract public class CombatUnit extends Unit {
     public CombatUnit(String name, int health, int gold, int experience,
                       int power, int agility, int luck, int damage, int defence, int level) {
         super(name, health, gold, experience);
-        this.power = power;
+        this.strength = power;
         this.agility = agility;
         this.luck = luck;
         this.damage = damage;

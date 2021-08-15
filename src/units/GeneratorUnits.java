@@ -60,15 +60,15 @@ public class GeneratorUnits {
     private void setMonsterStats(CombatUnit monster) {
         if (monster instanceof Skeleton) {
             monster.agility = CombatUnit.AGILITY + monster.level + 2;
-            monster.power = CombatUnit.POWER + monster.level;
+            monster.strength = CombatUnit.STRENGTH + monster.level;
         } else {
             monster.agility = CombatUnit.AGILITY + monster.level;
-            monster.power = CombatUnit.POWER + monster.level + 2;
+            monster.strength = CombatUnit.STRENGTH + monster.level + 2;
         }
         monster.experience = (int)(Unit.EXPERIENCE * 4  + 50 * monster.level * 0.5); //TODO remove multiplier at EXPERIENCE
         monster.gold = (int)(Unit.GOLD  + 50 * monster.level * 0.5);
         monster.luck = CombatUnit.LUCK + monster.level;
-        monster.health = CombatUnit.HEALTH + monster.level * monster.power;
+        monster.health = CombatUnit.HEALTH + monster.level * monster.strength;
     }
 
 
@@ -83,7 +83,7 @@ public class GeneratorUnits {
 
         int rarity = random.nextInt(5);
         int stat = random.nextInt(5);
-        if (monster.power > monster.agility) {
+        if (monster.strength > monster.agility) {
             name = String.format("%s %s", poolRarity.get(rarity), poolPower.get(stat));
         } else {
             name = String.format("%s %s", poolRarity.get(rarity), poolAgility.get(stat));

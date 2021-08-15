@@ -32,24 +32,25 @@ public class HeroPrototype extends CombatUnit{
         super(name, HP, GOLD, EXPERIENCE, BASE_STRENGTH, BASE_AGILITY, BASE_LUCK, BASE_DAMAGE, BASE_DEFENCE, BASE_LEVEL);
     }
 
-    public void levelUp(){
-        int lvlUpThreshold = 0;
-            lvlUpThreshold = (int)(BASE_EXPERIENCE + 0.75 * BASE_EXPERIENCE * level);
-            if(experience > lvlUpThreshold){
-                experience = experience - lvlUpThreshold;
-                level = level + 1;
-                setStats(level); //power, agi, luck
-                System.out.println("Уровень повышен! Текущий уровень :" + level);
-        }
-    }
-
-    private void setStats(int level){
-        agility = (int)(agility + BASE_AGILITY * 0.2 * level);
-        strength = (int)(strength + BASE_STRENGTH * 0.2 * level);
-        luck = (int)(luck + BASE_LUCK * 0.2 * level);
-        hp = (hp + 5 * level * strength);
-        maxHP = (maxHP + 5 * level * strength);
-    }
+//    public void currentLevelUp(){
+//        int lvlUpThreshold = 0;
+//
+//        lvlUpThreshold = (int)(BASE_EXPERIENCE + 0.75 * BASE_EXPERIENCE * level);
+//        if(experience > lvlUpThreshold){
+//            experience = experience - lvlUpThreshold;
+//            level = level + 1;
+//            setStats(level); //power, agi, luck
+//            System.out.println("Уровень повышен! Текущий уровень :" + level);
+//        }
+//    }
+//
+//    private void setStats(int level){
+//        agility = (int)(agility + BASE_AGILITY * 0.2 * level);
+//        strength = (int)(strength + BASE_STRENGTH * 0.2 * level);
+//        luck = (int)(luck + BASE_LUCK * 0.2 * level);
+//        hp = (hp + 5 * level * strength);
+//        maxHP = (maxHP + 5 * level * strength);
+//    }
 
     @Override
     public int attack() {
