@@ -1,4 +1,3 @@
-import org.w3c.dom.ls.LSOutput;
 import units.CombatUnit;
 import units.Hero;
 
@@ -134,7 +133,6 @@ public class Battle {
                 hero.setExperience(hero.getExperience() - lvlUpThreshold);
                 hero.setLevel(hero.getLevel() + 1);
                 setStats(hero.getLevel()); //power, agi, luck
-//                currentHP = hero.setHealth(); maxHP = hero.getHealth();
                 System.out.println("Exp: " + hero.getExperience() + "/" + lvlUpThreshold);
                 System.out.println("Уровень повышен! Текущий уровень :" + hero.getLevel());
             }

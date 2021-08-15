@@ -13,7 +13,6 @@ public class GeneratorUnits {
 
     private final Random random = new Random();
 
-
     public List<CombatUnit> generateMonsters() {
 
         List<CombatUnit> poll = new ArrayList<>();
@@ -91,5 +90,4 @@ public class GeneratorUnits {
         }
         monster.name = name + " " + monster.name;
     }
-
 }
