@@ -30,7 +30,7 @@ public class Hero extends CombatUnit {
     }
 
     public boolean currentLevelUp(){
-        int lvlUpThreshold = 0;
+        int lvlUpThreshold;
         for(int i = 0; i < level; i++){
             lvlUpThreshold = (int)(BASE_EXPERIENCE + 0.75 * BASE_EXPERIENCE * level);
             if(experience < lvlUpThreshold){
@@ -39,15 +39,22 @@ public class Hero extends CombatUnit {
             experience = experience - lvlUpThreshold;
             level = level + 1;
             setStats(level); //power, agi, luck
+            System.out.println("Level UP! Exp: " + experience + "/" + lvlUpThreshold);
+            getStats();
         } return true;
     }
 
     private void setStats(int level){
-        agility = (int)(agility + AGILITY * 0.2 * level);
-        strength = (int)(strength + STRENGTH * 0.2 * level);
-        luck = (int)(luck + LUCK * 0.2 * level);
-        health = (health + 5 * level * strength);
-        maxHP = (maxHP + 5 * level * strength);
+        agility = (int)(agility + AGILITY * 0.2);
+        strength = (int)(strength + STRENGTH * 0.2);
+        luck = (int)(luck + LUCK * 0.2);
+        health = health + 5 * strength;
+        maxHP = maxHP + 5 * strength;
+    }
+
+    private void getStats(){
+        System.out.println("Текущие статы: \n сила: " + strength + "\n ловкость: " + agility + "\n удача: " + luck +
+                "\n здоровье: " + health + "/" + maxHP);
     }
 
     @Override

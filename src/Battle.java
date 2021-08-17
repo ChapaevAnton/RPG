@@ -23,30 +23,30 @@ public class Battle {
         return deathToll;
     }
 
-    public void fight() {
+//    public void fight() {
+//
+//        if (turn()) {
+//            System.out.println(hero.getName() + " победил");
+//
+//            int totalGold = 0;
+//            int totalExp = 0;
+//            int totalKills = deathToll.size();
+//            for (CombatUnit monster : deathToll) {
+//                totalGold += monster.getGold();
+//                totalExp += monster.getExperience();
+//            }
+//            hero.setGold(hero.getGold() + totalGold);
+//            hero.setExperience(hero.getExperience() + totalExp);
+//            hero.setKill(hero.getKill() + totalKills);
+//
+//        } else {
+//            System.out.println(hero.getName() + " проиграл");
+//            // TODO: 10.08.2021 game over
+//        }
+//
+//    }
 
-        if (turn()) {
-            System.out.println(hero.getName() + " победил");
-
-            int totalGold = 0;
-            int totalExp = 0;
-            int totalKills = deathToll.size();
-            for (CombatUnit monster : deathToll) {
-                totalGold += monster.getGold();
-                totalExp += monster.getExperience();
-            }
-            hero.setGold(hero.getGold() + totalGold);
-            hero.setExperience(hero.getExperience() + totalExp);
-            hero.setKill(hero.getKill() + totalKills);
-
-        } else {
-            System.out.println(hero.getName() + " проиграл");
-            // TODO: 10.08.2021 game over
-        }
-
-    }
-
-    private boolean turn() {
+    public boolean turn() {
         int counter = 0;
         do {
             int randomMonster = random.nextInt(monsters.size());
@@ -56,12 +56,24 @@ public class Battle {
                 strike(monsters, hero);
             }
             counter++;
-            killCount();
+            kills();
             if(hero.currentLevelUp()){
                 System.out.println("Уровень героя " + hero.getName() + " повышен!");
             }
         } while (isAliveMonsters() && hero.isAlive());
         return hero.isAlive();
+    }
+
+    private void kills(){
+        for(int i = 0; i < monsters.size(); i++){
+            if(monsters.get(i).getHealth() <= 0){
+                hero.setExperience(hero.getExperience() + monsters.get(i).getExperience());
+                hero.setGold(hero.getGold() + monsters.get(i).getGold());
+                monsters.remove(i);
+                hero.setKill(hero.getKill() + 1);
+            }
+        }
+
     }
 
     private boolean isAliveMonsters() {
