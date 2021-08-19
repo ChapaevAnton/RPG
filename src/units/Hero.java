@@ -38,13 +38,13 @@ public class Hero extends CombatUnit {
             }
             experience = experience - lvlUpThreshold;
             level = level + 1;
-            setStats(level); //power, agi, luck
+            setStats(); //power, agi, luck
             System.out.println("Level UP! Exp: " + experience + "/" + lvlUpThreshold);
             getStats();
         } return true;
     }
 
-    private void setStats(int level){
+    private void setStats(){
         agility = (int)(agility + AGILITY * 0.2);
         strength = (int)(strength + STRENGTH * 0.2);
         luck = (int)(luck + LUCK * 0.2);
@@ -90,7 +90,5 @@ public class Hero extends CombatUnit {
                 ", defence=" + defence +
                 ", weapon=" + weapon +
                 ", armour=" + armour;
-
-
     }
 }

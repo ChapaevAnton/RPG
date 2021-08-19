@@ -42,7 +42,7 @@ public class Main {
                20, 0, 0, 0, 0, 1));
         listMonster.add(new Skeleton("Скелет2", 70, 50, 200,
                 40, 0, 0, 0, 0, 1));
-        listMonster.add(new Skeleton("Скелет3", 130, 50, 200,
+        listMonster.add(new Skeleton("Скелет3", 110, 50, 200,
                 40, 0, 0, 0, 0, 1));
 
 //        System.out.println(listMonster.stream().anyMatch(CombatUnit::isAlive));   //test for alive monsters
@@ -50,7 +50,7 @@ public class Main {
         System.out.println(listMonster.size());
 
         Battle battle = new Battle(hero, listMonster);
-        battle.turn();
+        battle.action();
 
         System.out.println(battle.getDeathToll());
         System.out.println(hero.getInfoFull());

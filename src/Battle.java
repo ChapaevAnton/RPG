@@ -4,6 +4,7 @@ import units.Hero;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class Battle {
@@ -12,6 +13,9 @@ public class Battle {
     private final List<CombatUnit> monsters;
     private final List<CombatUnit> deathToll;
     private final Random random = new Random(47);
+
+    private int counter = 0;
+    Scanner input = new Scanner(System.in);
 
     public Battle(Hero hero, List<CombatUnit> monsters) {
         this.hero = hero;
@@ -46,15 +50,41 @@ public class Battle {
 //
 //    }
 
-    public boolean turn() {
-        int counter = 0;
+//    public boolean turn() { //TODO check if new turn method is ok, then delete this one
+//        int counter = 0;
+//        do {
+//            int randomMonster = random.nextInt(monsters.size());
+//            if (counter % 2 == 0) {
+//                strike(hero, monsters.get(randomMonster));
+//            } else {
+//                strike(monsters, hero);
+//            }
+//            counter++;
+//            kills();
+//            if(hero.currentLevelUp()){
+//                System.out.println("Уровень героя " + hero.getName() + " повышен!");
+//            }
+//        } while (isAliveMonsters() && hero.isAlive());
+//        return hero.isAlive();
+//    }
+
+    public boolean action() {
         do {
-            int randomMonster = random.nextInt(monsters.size());
-            if (counter % 2 == 0) {
-                strike(hero, monsters.get(randomMonster));
+            if (counter % 2 == 0) { //TODO make "turn()" method for unloading action()
+                System.out.println("Которого монстра атаковать?");
+                for(int i = 0; i < monsters.size(); i++){
+                    System.out.println((i + 1) + monsters.get(i).getName());
+                }
+                int choice = input.nextInt() - 1;
+                if(choice > monsters.size() || choice < 0){
+                    System.out.println("Неверный выбор.");
+                    continue;
+                }
+                strike(hero, monsters.get(choice));
             } else {
                 strike(monsters, hero);
             }
+//            turn(choice);
             counter++;
             kills();
             if(hero.currentLevelUp()){
@@ -63,6 +93,14 @@ public class Battle {
         } while (isAliveMonsters() && hero.isAlive());
         return hero.isAlive();
     }
+
+//    private void turn(int chosenMonster){
+//        if (counter % 2 == 0) {
+//            strike(hero, monsters.get(chosenMonster));
+//        } else {
+//            strike(monsters, hero);
+//        }
+//    }
 
     private void kills(){
         for(int i = 0; i < monsters.size(); i++){
@@ -80,13 +118,13 @@ public class Battle {
         return monsters.stream().anyMatch(CombatUnit::isAlive);
     }
 
-    private void killCount() {
-        //добавляем убитых attackers в список убитых
-        deathToll.addAll(monsters.stream().filter(combatUnit -> !combatUnit.isAlive()).collect(Collectors.toList()));
-
-        //убираем с поля боя убитых attackers
-        monsters.removeIf(attacker -> !attacker.isAlive());
-    }
+//    private void killCount() {
+//        //добавляем убитых attackers в список убитых
+//        deathToll.addAll(monsters.stream().filter(combatUnit -> !combatUnit.isAlive()).collect(Collectors.toList()));
+//
+//        //убираем с поля боя убитых attackers
+//        monsters.removeIf(attacker -> !attacker.isAlive());
+//    }
 
     private void strike(List<CombatUnit> attackers, CombatUnit defender) {
         //если attacker жив он атакует defender
@@ -100,8 +138,7 @@ public class Battle {
         } else if(damage <= 0){
             damage = 0;
             System.out.println("Не пробил");
-        }
-        if (damage <= defender.getHealth()) {
+        } else if (damage <= defender.getHealth()) { //changed if to else if
             defender.setHealth(defender.getHealth() - damage);
             System.out.println(attacker + " ударил на " + damage + " урона " + defender);
         } else {
