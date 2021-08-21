@@ -13,14 +13,16 @@ public class Merchant extends Unit {
         return listOfGood;
     }
 
-    public enum Goods {
-        POTION25(25, 25),
-        POTION50(50, 50),
-        POTION100(100, 100);
+    public enum Goods { //TODO make quantity for the goods
+        POTION25("Малое зелье исцеления", 25, 25),
+        POTION50("Среднее зелье исцеления", 50, 50),
+        POTION100("Большое зелье исцеления", 100, 100);
+        public final String name;
         private final int point;
         private final int price;
 
-        Goods(int point, int price) {
+        Goods(String name, int point, int price) {
+            this.name = name;
             this.point = point;
             this.price = price;
         }

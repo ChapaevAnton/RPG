@@ -28,12 +28,12 @@ public class Main {
         Weapon weapon = new Weapon("Ржавый меч");                                  //test for weapon & armor
         weapon.setDamage(30);
         hero.setWeapon(weapon);
-//        System.out.println(armour);
+        System.out.println(armour);
         hero.setArmour(armour);
 //        System.out.println(hero.getArmour());
 //        System.out.println(hero.getDefence());
 //        System.out.println(hero.getTotalDefence());
-
+/*
         GeneratorUnits generatorUnits = new GeneratorUnits(hero);
         List<CombatUnit> listMonster = generatorUnits.generateMonsters();
 
@@ -45,8 +45,6 @@ public class Main {
         listMonster.add(new Skeleton("Скелет3", 110, 50, 200,
                 40, 0, 0, 0, 0, 1));
 
-//        System.out.println(listMonster.stream().anyMatch(CombatUnit::isAlive));   //test for alive monsters
-
         System.out.println(listMonster.size());
 
         Battle battle = new Battle(hero, listMonster);
@@ -54,6 +52,6 @@ public class Main {
 
         System.out.println(battle.getDeathToll());
         System.out.println(hero.getInfoFull());
-
+*/
     }
 }

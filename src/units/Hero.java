@@ -1,8 +1,9 @@
 package units;
 
+import java.util.List;
 import java.util.Random;
 
-public class Hero extends CombatUnit {
+public class Hero extends CombatUnit{
 
     public static final int LEVEL = 1;
     protected int kill;//количество убитых
@@ -10,8 +11,13 @@ public class Hero extends CombatUnit {
     protected int maxHP = health;
     //спосбоность
 
-    public Hero(String name, int power){
-        super(name, HEALTH, GOLD, EXPERIENCE, power, AGILITY, LUCK, DAMAGE, DEFENCE, LEVEL);
+    public Hero(String name, int strength){
+        super(name, HEALTH, GOLD, EXPERIENCE, strength, AGILITY, LUCK, DAMAGE, DEFENCE, LEVEL);
+        this.kill = 0;
+    }
+
+    public Hero(){
+        super(null, HEALTH, GOLD, EXPERIENCE, STRENGTH, AGILITY, LUCK, DAMAGE, DEFENCE, LEVEL);
         this.kill = 0;
     }
 
@@ -75,6 +81,7 @@ public class Hero extends CombatUnit {
     }
 
 
+
     public String getInfoFull() {
         return "Hero -> \n" +
                 "  name='" + name +
@@ -91,4 +98,6 @@ public class Hero extends CombatUnit {
                 ", weapon=" + weapon +
                 ", armour=" + armour;
     }
+
+
 }
