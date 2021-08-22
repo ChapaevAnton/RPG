@@ -1,3 +1,4 @@
+import equipments.Backpack;
 import units.Hero;
 import units.Merchant;
 
@@ -10,29 +11,30 @@ public class Trade {
         this.merch = merch;
     }
 
-    public void getGoodType(int choice){
+    public void getPot(int choice){
         switch (choice) {
-            case 1:
-                buyGood(Merchant.Goods.POTION25);
-                System.out.println(hero.getName() + " купил " + Merchant.Goods.POTION25.name());
-                break;
-            case 2:
-                buyGood(Merchant.Goods.POTION50);
-                System.out.println(hero.getName() + " купил " + Merchant.Goods.POTION50.name());
-                break;
-            case 3:
-                buyGood(Merchant.Goods.POTION100);
-                System.out.println(hero.getName() + " купил " + Merchant.Goods.POTION100.name());
-                break;
+            case 1 -> buyItem(Merchant.Items.POTION25);
+            case 2 -> buyItem(Merchant.Items.POTION50);
+            case 3 -> buyItem(Merchant.Items.POTION100);
         }
     }
 
+    public void getEquip(int choice){
+        switch (choice) {
+            case 1 -> buyItem(Merchant.Items.SWORD);
+            case 2 -> buyItem(Merchant.Items.SHIELD);
+            case 3 -> buyItem(Merchant.Items.AXE);
+            case 4 -> buyItem(Merchant.Items.PLATE);
+            case 5 -> buyItem(Merchant.Items.HELM);
+        }
+    }
 
-    private boolean buyGood(Merchant.Goods good){
-        if(hero.getGold() >= good.getPrice()){
-            hero.setGold(hero.getGold() - good.getPrice());
-            merch.setGold(merch.getGold() + good.getPrice());
-            putInBackpack(good);
+    private boolean buyItem(Merchant.Items item){
+        if(hero.getGold() >= item.getPrice()){
+            hero.setGold(hero.getGold() - item.getPrice());
+            merch.setGold(merch.getGold() + item.getPrice());
+            Hero.putInBackPack(item);
+            System.out.println(hero.getName() + " покупает " + item.name);
             return true;
         } else {
             System.out.println("Недостаточно золота.");
@@ -40,8 +42,4 @@ public class Trade {
         }
     }
 
-    private void putInBackpack(Merchant.Goods good){
-        //TODO make a backpack
-        hero.setHealth(hero.getHealth() + good.getPoint());
-    }
 }

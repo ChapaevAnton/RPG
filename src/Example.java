@@ -11,8 +11,9 @@ public class Example {
     private static boolean gameOn = true;
     private static boolean tradeOn = false;
     private static int menuLvl = 0;
-    private static Hero hero = new Hero();
-    private static Merchant merch = new Merchant("Боб", 50, 500, 0);
+    private static int tradeMenuLvl = 0;
+    private static final Hero hero = new Hero();
+    private static final Merchant merch = new Merchant("Боб", 50, 500, 0);
 
     public static void main(String[] args) {
         System.out.println("Привет-привет! Это пробный вариант текстовой RPG." +
@@ -20,6 +21,7 @@ public class Example {
         while(gameOn){
             Scanner input = new Scanner(System.in);
             if(menuLvl == 0){
+                System.out.println("Главно меню:");
                 System.out.println("1. Создать героя \n2. Играть \n3. К торговцу \n4. Выход");
                 int choice = input.nextInt();
                 switch (choice){
@@ -34,11 +36,10 @@ public class Example {
                     case 2:
                         if(hero.getName() == null){
                             System.out.println("Сражаться-то пока некому. Может сначала создадим героя?");
-                            continue;
                         } else {
                             battle();
-                            continue;
                         }
+                        continue;
                     case 3:
                         menuLvl = 2;
                         tradeOn = true;
@@ -65,29 +66,68 @@ public class Example {
                 if(hero.getName() == null){
                     System.out.println("Героя бы для начала создать...");
                     menuLvl = 0;
-                    continue;
                 } else {
                     System.out.println("Торговец приветствует вас в своей лавке и предлагает на выбор несколько товаров");
                     Trade trade = new Trade(hero, merch);
                     while (tradeOn){
-                        System.out.println("1. Малое зелье \n2. Среднее зелье \n3. Большое зелье \n4. Завершить торг.");
-                        int choice = input.nextInt();
-                        switch (choice){
-                            case 1:
-                                trade.getGoodType(1);
-                                continue;
-                            case 2:
-                                trade.getGoodType(2);
-                                continue;
-                            case 3:
-                                trade.getGoodType(3);
-                                continue;
-                            case 4:
-                                tradeOn = false;
-                                menuLvl = 0;
-                                continue;
-                            default:
-                                System.out.println("Некорректный ввод");
+                        if(tradeMenuLvl == 0){
+                            System.out.println("Выберите, что вас интересует: \n1. Зелья \n2. Экиперовка \n3. Покинуть торговца");
+                            int tradeChoice = input.nextInt();
+                            switch (tradeChoice) {
+                                case 1 -> {
+                                    tradeMenuLvl = 1;
+                                }
+                                case 2 -> {
+                                    tradeMenuLvl = 2;
+                                }
+                                case 3 -> {
+                                    menuLvl = 0;
+                                    tradeOn = false;
+                                }
+                                default -> System.out.println("Некорректный ввод");
+                            }
+                        } else if (tradeMenuLvl == 1){
+                            System.out.println("1. Малое зелье \n2. Среднее зелье \n3. Большое зелье \n4. Вернуться");
+                            int choice = input.nextInt();
+                            switch (choice) {
+                                case 1 -> {
+                                    trade.getPot(1);
+                                }
+                                case 2 -> {
+                                    trade.getPot(2);
+                                }
+                                case 3 -> {
+                                    trade.getPot(3);
+                                }
+                                case 4 -> {
+                                    tradeMenuLvl = 0;
+                                }
+                                default -> System.out.println("Некорректный ввод");
+                            }
+                        } else if (tradeMenuLvl == 2){
+                            System.out.println("1. Меч \n2. Щит \n3. Топор \n4. Шлем \n5. Доспехи \n6. Вернуться");
+                            int choice = input.nextInt();
+                            switch (choice) {
+                                case 1 -> {
+                                    trade.getEquip(1);
+                                }
+                                case 2 -> {
+                                    trade.getEquip(2);
+                                }
+                                case 3 -> {
+                                    trade.getEquip(3);
+                                }
+                                case 4 -> {
+                                    trade.getEquip(4);
+                                }
+                                case 5 -> {
+                                    trade.getEquip(6);
+                                }
+                                case 6 -> {
+                                    tradeMenuLvl = 0;
+                                }
+                                default -> System.out.println("Некорректный ввод");
+                            }
                         }
                     }
                 }

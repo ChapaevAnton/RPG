@@ -1,5 +1,7 @@
 package units;
 
+import equipments.Backpack;
+
 import java.util.List;
 import java.util.Random;
 
@@ -9,7 +11,7 @@ public class Hero extends CombatUnit{
     protected int kill;//количество убитых
     public static final int BASE_EXPERIENCE = 100;
     protected int maxHP = health;
-    //спосбоность
+    protected static Backpack backpack = new Backpack();
 
     public Hero(String name, int strength){
         super(name, HEALTH, GOLD, EXPERIENCE, strength, AGILITY, LUCK, DAMAGE, DEFENCE, LEVEL);
@@ -33,6 +35,10 @@ public class Hero extends CombatUnit{
 
     public void setKill(int kill) {
         this.kill = kill;
+    }
+
+    public static void putInBackPack(Merchant.Items item){
+        backpack.putInBackPack(item);
     }
 
     public boolean currentLevelUp(){

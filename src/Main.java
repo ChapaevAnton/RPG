@@ -18,18 +18,18 @@ public class Main {
 //        System.out.println(merch);                                            // check gold for merch and hero
 //        System.out.println(hero.getGold());
 //        System.out.println(hero);
-
-        Hero hero = new Hero("Дзюба", 5);
-
-        System.out.println(hero.getInfoFull());
-
-        Armour armour = new Armour("Панцирь бедной черепахи");
-        armour.setDefence(25);
-        Weapon weapon = new Weapon("Ржавый меч");                                  //test for weapon & armor
-        weapon.setDamage(30);
-        hero.setWeapon(weapon);
-        System.out.println(armour);
-        hero.setArmour(armour);
+//
+//        Hero hero = new Hero("Дзюба", 5);
+//
+//        System.out.println(hero.getInfoFull());
+//
+//        Armour armour = new Armour("Панцирь бедной черепахи");
+//        armour.setDefence(25);
+//        Weapon weapon = new Weapon("Ржавый меч");                                  //test for weapon & armor
+//        weapon.setDamage(30);
+//        hero.setWeapon(weapon);
+//        System.out.println(armour);
+//        hero.setArmour(armour);
 //        System.out.println(hero.getArmour());
 //        System.out.println(hero.getDefence());
 //        System.out.println(hero.getTotalDefence());
