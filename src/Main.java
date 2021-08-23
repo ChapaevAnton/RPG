@@ -1,12 +1,3 @@
-import equipments.Armour;
-import equipments.Weapon;
-import units.CombatUnit;
-import units.GeneratorUnits;
-import units.Hero;
-import units.Skeleton;
-
-import java.util.List;
-
 public class Main {
 
     public static void main(String[] args) {

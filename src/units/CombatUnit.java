@@ -1,6 +1,6 @@
 package units;
 
-import equipments.Armour;
+import equipments.Armor;
 import equipments.Weapon;
 
 abstract public class CombatUnit extends Unit {
@@ -18,10 +18,10 @@ abstract public class CombatUnit extends Unit {
     protected int damage;
     protected int defence;
     protected int level;
-
+    protected int experience;
 
     protected Weapon weapon;
-    protected Armour armour;
+    protected Armor armor;
 
     public int getStrength() {
         return strength;
@@ -49,13 +49,22 @@ abstract public class CombatUnit extends Unit {
 
     public CombatUnit(String name, int health, int gold, int experience,
                       int power, int agility, int luck, int damage, int defence, int level) {
-        super(name, health, gold, experience);
+        super(name, health, gold);
         this.strength = power;
         this.agility = agility;
         this.luck = luck;
         this.damage = damage;
         this.defence = defence;
         this.level = level;
+        this.experience = experience;
+    }
+
+    public int getExperience() {
+        return experience;
+    }
+
+    public void setExperience(int experience) {
+        this.experience = experience;
     }
 
     public boolean isAlive(){
@@ -94,23 +103,23 @@ abstract public class CombatUnit extends Unit {
         this.weapon = weapon;
     }
 
-    public Armour getArmour() {
-        return armour;
+    public Armor getArmor() {
+        return armor;
     }
 
-    public void setArmour(Armour armour) {
-        this.armour = armour;
+    public void setArmor(Armor armor) {
+        this.armor = armor;
     }
 
     public int getTotalDamage() {
         int totalDamage = getDamage();
-        totalDamage += weapon == null ? 0 : weapon.getDamage();
+        totalDamage += weapon == null ? 0 : weapon.getPoints();
         return totalDamage;
     }
 
     public int getTotalDefence() {
         int totalDefence = getDefence();
-        totalDefence += armour == null ? 0 : armour.getDefence();
+        totalDefence += armor == null ? 0 : armor.getPoints();
         return totalDefence;
     }
 

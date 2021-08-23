@@ -2,27 +2,16 @@ package equipments;
 
 public class Weapon extends Equipment {
 
-    private final static int DEFAULT_DAMAGE = 4;
 
-    private int damage = DEFAULT_DAMAGE;
-
-    public Weapon(String name) {
-        super(name);
-    }
-
-    public int getDamage() {
-        return damage;
-    }
-
-    public void setDamage(int damage) {
-        this.damage = damage;
+    public Weapon(String name, int points, int price, int quantity) {
+        super(name, points, price, quantity);
     }
 
     @Override
     public String toString() {
         return "Weapon{" +
                 "name='" + name + '\'' + "; " +
-                "damage='" + damage + '\'' +
+                "damage='" + points + '\'' +
                 '}';
     }
 }

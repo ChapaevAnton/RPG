@@ -13,24 +13,17 @@ public class Battle {
 
     private final Hero hero;
     private final List<CombatUnit> monsters;
-    private final List<CombatUnit> deathToll;
     private final Random random = new Random(47);
-
     private int counter = 0;
     Scanner input = new Scanner(System.in);
 
     public Battle(Hero hero, List<CombatUnit> monsters) {
         this.hero = hero;
         this.monsters = monsters;
-        this.deathToll = new ArrayList<>();
-    }
-
-    public List<CombatUnit> getDeathToll() {
-        return deathToll;
     }
 
     public boolean action() {
-        do {
+        while (monsters.size() != 0 && hero.getHealth() > 0) {
             if (counter % 2 == 0) { //TODO make "turn()" method for unloading action()
                 System.out.println("Которого монстра атаковать?");
                 for(int i = 0; i < monsters.size(); i++){
@@ -52,16 +45,20 @@ public class Battle {
             } else {
                 strike(monsters, hero);
             }
-//            turn(choice);
             counter++;
             kills();
             if(hero.currentLevelUp()){
                 System.out.println("Уровень героя " + hero.getName() + " повышен!");
             }
-        } while (isAliveMonsters() && hero.isAlive());
+        }
+        if(hero.getHealth() <= 0){
+            System.out.println("Поражение!");
+            hero.setName(null);
+        } else if (monsters.size() == 0){
+            System.out.println("Победа!");
+        }
         return hero.isAlive();
     }
-
 
     private void kills(){
         for(int i = 0; i < monsters.size(); i++){
@@ -74,13 +71,10 @@ public class Battle {
         }
     }
 
-    private boolean isAliveMonsters() {
-        return monsters.stream().anyMatch(CombatUnit::isAlive);
-    }
-
     private void strike(List<CombatUnit> attackers, CombatUnit defender) {
-        //если attacker жив он атакует defender
-        attackers.stream().filter(CombatUnit::isAlive).forEach(attacker -> strike(attacker, defender));
+        for (CombatUnit attacker : attackers) {
+            strike(attacker, defender);
+        }
     }
 
     private void strike(CombatUnit attacker, CombatUnit defender) {
@@ -88,7 +82,7 @@ public class Battle {
         if(damage <= 0){
             damage = 0;
             System.out.println("Не пробил");
-        } else if (damage <= defender.getHealth()) { //changed if to else if
+        } else if (damage <= defender.getHealth()) {
             defender.setHealth(defender.getHealth() - damage);
             System.out.println(attacker + " ударил на " + damage + " урона " + defender);
         } else {
@@ -98,8 +92,8 @@ public class Battle {
     }
 
     public void splash(Hero hero, List<CombatUnit> combatUnits) {
-        for(int i = 0; i < combatUnits.size(); i++){
-            strike(hero, combatUnits.get(i));
+        for (CombatUnit combatUnit : combatUnits) {
+            strike(hero, combatUnit);
         }
     }
 }

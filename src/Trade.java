@@ -1,4 +1,5 @@
 import equipments.Backpack;
+import equipments.Equipment;
 import units.Hero;
 import units.Merchant;
 
@@ -10,6 +11,7 @@ public class Trade {
         this.hero = hero;
         this.merch = merch;
     }
+
 
     public void getPot(int choice){
         switch (choice) {

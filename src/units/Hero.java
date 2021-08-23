@@ -1,8 +1,9 @@
 package units;
 
+import equipments.Armor;
 import equipments.Backpack;
+import equipments.Weapon;
 
-import java.util.List;
 import java.util.Random;
 
 public class Hero extends CombatUnit{
@@ -12,6 +13,7 @@ public class Hero extends CombatUnit{
     public static final int BASE_EXPERIENCE = 100;
     protected int maxHP = health;
     protected static Backpack backpack = new Backpack();
+    protected int lvlUpThreshold;
 
     public Hero(String name, int strength){
         super(name, HEALTH, GOLD, EXPERIENCE, strength, AGILITY, LUCK, DAMAGE, DEFENCE, LEVEL);
@@ -38,11 +40,10 @@ public class Hero extends CombatUnit{
     }
 
     public static void putInBackPack(Merchant.Items item){
-        backpack.putInBackPack(item);
+        Backpack.putInBackPack(item);
     }
 
     public boolean currentLevelUp(){
-        int lvlUpThreshold;
         for(int i = 0; i < level; i++){
             lvlUpThreshold = (int)(BASE_EXPERIENCE + 0.75 * BASE_EXPERIENCE * level);
             if(experience < lvlUpThreshold){
@@ -86,24 +87,48 @@ public class Hero extends CombatUnit{
         return getTotalDefence();
     }
 
-
-
-    public String getInfoFull() {
-        return "Hero -> \n" +
-                "  name='" + name +
-                ", level=" + level +
-                ", health=" + health +
-                ", kill=" + kill +
-                ", experience=" + experience +
-                ", gold=" + gold + "\n" +
-                "  power=" + strength +
-                ", agility=" + agility +
-                ", luck=" + luck + "\n" +
-                "  damage=" + damage +
-                ", defence=" + defence +
-                ", weapon=" + weapon +
-                ", armour=" + armour;
+    @Override
+    public String toString() {
+        return name + ", lvl=" + level + ", HP=" + health + ", exp=" + experience + "/" + lvlUpThreshold;
     }
 
+    public void heroType(int choice){
+        switch (choice) {
+            case 1 -> agility += 5;
+            case 2 -> strength += 5;
+            case 3 -> luck += 10;
+            default -> System.out.println("Некорректный ввод");
+        }
+    }
 
+    public void showBackpack(){
+        backpack.backpackContent();
+    }
+
+    public void removeFromBackpack(){
+        backpack.deleteFromBackpack();
+    }
+
+    public void drinkPot(Merchant.Items potion){
+        health = health + potion.getPoint();
+        potion.setQuantity(potion.getQuantity() - 1);
+    }
+
+    public void arm(Merchant.Items equip){
+        if(equip == Merchant.Items.SWORD || equip == Merchant.Items.AXE){
+            setWeapon((Weapon)backpack.kostyl(equip));
+        } else {
+            setArmor((Armor)backpack.kostyl(equip));
+        }
+    }
+
+    public String getInfoFull() {
+        return "Герой: " + name + ", уровень: " + level + ", experience=" + experience + "/" + lvlUpThreshold +
+                "\n здоровье: " + health + " золото: " + gold + " фрагов: " + kill +
+                "\nСтаты:" +
+                "\nСила: " + strength +
+                "\nЛовность: " + agility +
+                "\nУдача: " + luck +
+                "\nОружие: " + weapon + "Броня: " + armor;
+    }
 }

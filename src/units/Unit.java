@@ -10,13 +10,12 @@ public abstract class Unit {
     protected String name;
     protected int health;
     protected int gold;
-    protected int experience;
 
-    protected Unit(String name, int health, int gold, int experience) {
+
+    protected Unit(String name, int health, int gold) {
         this.name = name;
         this.health = health;
         this.gold = gold;
-        this.experience = experience;
     }
 
     public String getName() {
@@ -43,12 +42,5 @@ public abstract class Unit {
         this.gold = gold;
     }
 
-    public int getExperience() {
-        return experience;
-    }
-
-    public void setExperience(int experience) {
-        this.experience = experience;
-    }
 
 }
