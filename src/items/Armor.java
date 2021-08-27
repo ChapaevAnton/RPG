@@ -1,4 +1,4 @@
-package equipments;
+package items;
 
 public class Armor extends Equipment{
 
@@ -9,7 +9,7 @@ public class Armor extends Equipment{
     @Override
     public String toString() {
         return "Armour{" +
-                "defence=" + points +
+                "defence=" + getPoints() +
                 ", name='" + name + '\'' +
                 '}';
     }

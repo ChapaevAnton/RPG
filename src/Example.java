@@ -1,3 +1,5 @@
+import items.Armor;
+import items.Weapon;
 import units.*;
 import units.CombatUnit;
 import units.GeneratorUnits;
@@ -15,6 +17,7 @@ public class Example {
     private static final Scanner input = new Scanner(System.in);
 
     public static void main(String[] args) {
+        hero.setGold(500);
         System.out.println("Привет-привет! Это пробный вариант текстовой RPG." +
                 " Если всё же решишься поиграть - помотри что у нас там по пунктам меню.");
         while(gameOn){
@@ -86,22 +89,20 @@ public class Example {
         GeneratorUnits generatorUnits = new GeneratorUnits(hero);
         List<CombatUnit> listMonster = generatorUnits.generateMonsters();
 
-//        //Test-block for high experience
-//        listMonster.clear();
-//        listMonster.add(new Skeleton("Скелет1", 100, 50, 200,
-//                20, 0, 0, 0, 0, 1));
-//        listMonster.add(new Skeleton("Скелет2", 70, 50, 200,
-//                40, 0, 0, 0, 0, 1));
-//        listMonster.add(new Skeleton("Скелет3", 110, 50, 200,
-//                40, 0, 0, 0, 0, 1));
-//
-//        //Test-block for weapon and armor
-//        Armour armour = new Armour("Панцирь бедной черепахи");
-//        armour.setDefence(25);
-//        Weapon weapon = new Weapon("Ржавый меч");
-//        weapon.setDamage(30);
-//        hero.setWeapon(weapon);
-//        hero.setArmour(armour);
+        //Test-block for high experience
+        listMonster.clear();
+        listMonster.add(new Skeleton("Скелет1", 100, 200, 200,
+                20, 0, 0, 0, 0, 1));
+        listMonster.add(new Skeleton("Скелет2", 70, 200, 200,
+                40, 0, 0, 0, 0, 1));
+        listMonster.add(new Skeleton("Скелет3", 110, 200, 200,
+                40, 0, 0, 0, 0, 1));
+
+        //Test-block for weapon and armor
+        Armor armor = new Armor("Панцирь бедной черепахи", 25, 75, 1);
+        Weapon weapon = new Weapon("Ржавый меч", 30, 100, 1);
+        hero.setWeapon(weapon);
+        hero.setArmor(armor);
 
         Battle battle = new Battle(hero, listMonster);
         battle.action();
@@ -140,24 +141,22 @@ public class Example {
             } else if (tradeMenuLvl == 1){
                 System.out.println("1. Малое зелье \n2. Среднее зелье \n3. Большое зелье \n4. Вернуться");
                 int choice = input.nextInt();
-                switch (choice) {
-                    case 1 -> trade.getPot(1);
-                    case 2 -> trade.getPot(2);
-                    case 3 -> trade.getPot(3);
-                    case 4 -> tradeMenuLvl = 0;
-                    default -> System.out.println("Некорректный ввод");
+                if(choice == 4){
+                    tradeMenuLvl = 0;
+                } else if(choice < 0 || choice > 4){
+                    System.out.println("Некорректный ввод");
+                } else {
+                    trade.getPot(choice - 1);
                 }
             } else if (tradeMenuLvl == 2){
                 System.out.println("1. Меч \n2. Щит \n3. Топор \n4. Шлем \n5. Доспехи \n6. Вернуться");
-                int choice = input.nextInt();
-                switch (choice) {
-                    case 1 -> trade.getEquip(1);
-                    case 2 -> trade.getEquip(2);
-                    case 3 -> trade.getEquip(3);
-                    case 4 -> trade.getEquip(4);
-                    case 5 -> trade.getEquip(5);
-                    case 6 -> tradeMenuLvl = 0;
-                    default -> System.out.println("Некорректный ввод");
+                int choice = input.nextInt() - 1;
+                if(choice == 5){
+                    tradeMenuLvl = 0;
+                } else if(choice < 0 || choice > 5){
+                    System.out.println("Некорректный ввод");
+                } else {
+                    trade.getEquip(choice);
                 }
             }
         }
@@ -165,13 +164,19 @@ public class Example {
 
     private static void menuLvl3(){ //TODO finish the work with backpack
         while(backpackOpen){
-            System.out.println("Сейчас в рюкзаке: ");
             hero.showBackpack();
-            System.out.println("Что забираем, что надеваем?");
+            System.out.println("Что пользуем, что надеваем?");
+            for(int i = 0; i < Hero.backpackSize(); i++){ //TODO ваще костыль, переделать нахуй
+                System.out.print((i + 1) + ". ");
+                System.out.println(hero.getBackpackItem(i + 1).name);
+            }
+            System.out.println((Hero.backpackSize() + 1) + ". Выход");
             int choice = input.nextInt();
-            if(choice == 1){
+            if(choice == (Hero.backpackSize() + 1)){
                 menuLvl = 0;
                 backpackOpen = false;
+            } else {
+                hero.useItem(hero.getBackpackItem(choice)); //TODO Rework
             }
         }
     }

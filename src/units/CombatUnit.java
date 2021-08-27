@@ -1,7 +1,7 @@
 package units;
 
-import equipments.Armor;
-import equipments.Weapon;
+import items.Armor;
+import items.Weapon;
 
 abstract public class CombatUnit extends Unit {
 
@@ -19,6 +19,7 @@ abstract public class CombatUnit extends Unit {
     protected int defence;
     protected int level;
     protected int experience;
+    protected int maxHP = health;
 
     protected Weapon weapon;
     protected Armor armor;
@@ -127,7 +128,7 @@ abstract public class CombatUnit extends Unit {
     public String toString() {
         return name +
                 ", lvl=" + level +
-                ", HP=" + health;
+                ", HP: " + health + "/" + maxHP;
     }
 
     public abstract int attack();

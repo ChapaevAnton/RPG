@@ -1,8 +1,6 @@
 package units;
 
-import equipments.Armor;
-import equipments.Backpack;
-import equipments.Weapon;
+import items.*;
 
 import java.util.Random;
 
@@ -15,21 +13,16 @@ public class Hero extends CombatUnit{
     protected static Backpack backpack = new Backpack();
     protected int lvlUpThreshold;
 
-    public Hero(String name, int strength){
-        super(name, HEALTH, GOLD, EXPERIENCE, strength, AGILITY, LUCK, DAMAGE, DEFENCE, LEVEL);
-        this.kill = 0;
-    }
-
     public Hero(){
         super(null, HEALTH, GOLD, EXPERIENCE, STRENGTH, AGILITY, LUCK, DAMAGE, DEFENCE, LEVEL);
         this.kill = 0;
     }
 
-    public Hero(String name, int health, int gold, int experience, int kill, int strength, int agility, int luck,
-                int damage, int defence, int level) {
-        super(name, health, gold, experience, strength, agility, luck, damage, defence, level);
-        this.kill = kill;
-    }
+//    public Hero(String name, int health, int gold, int experience, int kill, int strength, int agility, int luck,
+//                int damage, int defence, int level) {
+//        super(name, health, gold, experience, strength, agility, luck, damage, defence, level);
+//        this.kill = kill;
+//    }
 
     public int getKill() {
         return kill;
@@ -37,10 +30,6 @@ public class Hero extends CombatUnit{
 
     public void setKill(int kill) {
         this.kill = kill;
-    }
-
-    public static void putInBackPack(Merchant.Items item){
-        Backpack.putInBackPack(item);
     }
 
     public boolean currentLevelUp(){
@@ -89,7 +78,7 @@ public class Hero extends CombatUnit{
 
     @Override
     public String toString() {
-        return name + ", lvl=" + level + ", HP=" + health + ", exp=" + experience + "/" + lvlUpThreshold;
+        return name + ", lvl: " + level + ", HP: " + health + "/" + maxHP + ", exp: " + experience + "/" + lvlUpThreshold;
     }
 
     public void heroType(int choice){
@@ -101,34 +90,77 @@ public class Hero extends CombatUnit{
         }
     }
 
+
+    //Item methods
     public void showBackpack(){
         backpack.backpackContent();
     }
-
     public void removeFromBackpack(){
-        backpack.deleteFromBackpack();
+        backpack.deleteNoQuantity();
+    }
+    public Item getBackpackItem(int num){
+        return backpack.getItem(num);
+    }
+    public static int backpackSize(){
+        return backpack.backpackSize();
+    }
+    public static void putInBackPack(Item item){
+        Backpack.putInBackpack(item);
+        backpackSize();
     }
 
-    public void drinkPot(Merchant.Items potion){
-        health = health + potion.getPoint();
+    public void useItem(Item item){
+        if(item instanceof Pot){
+            drinkPot(item);
+        } else if (item instanceof Equipment){
+            arm(item);
+        }
+        removeFromBackpack();
+    }
+    public void drinkPot(Item potion){
+        health = health + potion.getPoints();
+        if(health > maxHP){
+            health = maxHP;
+        }
         potion.setQuantity(potion.getQuantity() - 1);
+        System.out.println(name + " выпил " + potion.name + ". Текущее здоровье " + health + "/" + maxHP);
+    }
+    public void arm(Item equip){
+        if(equip == Merchant.equips.get(0) || equip == Merchant.equips.get(2)){
+            if(getWeapon() == null){
+                setWeapon((Weapon)equip);
+            } else {
+                disarm(weapon);
+                setWeapon((Weapon)equip);
+            }
+        } else {
+            if(getArmor() == null){
+                setArmor((Armor) equip);
+            } else {
+                disarm(armor);
+                setArmor((Armor)equip);
+            }
+        }
+        equip.setQuantity(equip.getQuantity() - 1);
     }
 
-    public void arm(Merchant.Items equip){
-        if(equip == Merchant.Items.SWORD || equip == Merchant.Items.AXE){
-            setWeapon((Weapon)backpack.kostyl(equip));
+    public void disarm(Item equip){
+        putInBackPack(equip);
+        if(equip instanceof Weapon){
+            setWeapon(null);
         } else {
-            setArmor((Armor)backpack.kostyl(equip));
+            setArmor(null);
         }
     }
 
+
     public String getInfoFull() {
-        return "Герой: " + name + ", уровень: " + level + ", experience=" + experience + "/" + lvlUpThreshold +
-                "\n здоровье: " + health + " золото: " + gold + " фрагов: " + kill +
+        return "Герой: " + name + ", уровень: " + level + ", опыт: " + experience + "/" + lvlUpThreshold +
+                "\n здоровье: " + health + ", золото: " + gold + ", убийств: " + kill +
                 "\nСтаты:" +
                 "\nСила: " + strength +
                 "\nЛовность: " + agility +
                 "\nУдача: " + luck +
-                "\nОружие: " + weapon + "Броня: " + armor;
+                "\nОружие: " + weapon + ", Броня: " + armor;
     }
 }
