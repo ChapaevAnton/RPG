@@ -1,13 +1,9 @@
 import units.CombatUnit;
 import units.Hero;
-import units.Monster;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.concurrent.CompletableFuture;
-import java.util.stream.Collectors;
 
 public class Battle {
 
@@ -23,7 +19,7 @@ public class Battle {
         this.monsters = monsters;
     }
 
-    public boolean action() {
+    public void action() {
         while (monsters.size() != 0 && hero.getHealth() > 0) {
             if (counter % 2 == 0) { //TODO make "turn()" method for unloading action()
                 System.out.println("Что делаем?");
@@ -63,7 +59,7 @@ public class Battle {
         } else if (monsters.size() == 0){
             System.out.println("Победа!");
         }
-        return hero.isAlive();
+        hero.isAlive();
     }
 
     private void kills(){

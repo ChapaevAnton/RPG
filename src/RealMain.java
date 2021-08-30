@@ -166,7 +166,7 @@ public class RealMain {
         while(backpackOpen){
             hero.showBackpack();
             System.out.println("Что пользуем, что надеваем?");
-            for(int i = 0; i < Hero.backpackSize(); i++){ //TODO ваще костыль, переделать нахуй
+            for(int i = 0; i < Hero.backpackSize(); i++){ //TODO another copy from backpack, rework
                 System.out.print((i + 1) + ". ");
                 System.out.println(hero.getBackpackItem(i + 1).name);
             }
