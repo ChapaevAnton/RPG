@@ -6,7 +6,7 @@ import units.GeneratorUnits;
 import java.util.List;
 import java.util.Scanner;
 
-public class Example {
+public class RealMain {
     private static boolean gameOn = true;
     private static int menuLvl = 0;
     private static boolean tradeOn = false;
@@ -101,8 +101,8 @@ public class Example {
         //Test-block for weapon and armor
         Armor armor = new Armor("Панцирь бедной черепахи", 25, 75, 1);
         Weapon weapon = new Weapon("Ржавый меч", 30, 100, 1);
-        hero.setWeapon(weapon);
-        hero.setArmor(armor);
+        hero.arm(weapon);
+        hero.arm(armor);
 
         Battle battle = new Battle(hero, listMonster);
         battle.action();
@@ -175,6 +175,8 @@ public class Example {
             if(choice == (Hero.backpackSize() + 1)){
                 menuLvl = 0;
                 backpackOpen = false;
+            } else if(choice > Hero.backpackSize() + 1){
+                System.out.println("Некорретный ввод");
             } else {
                 hero.useItem(hero.getBackpackItem(choice)); //TODO Rework
             }

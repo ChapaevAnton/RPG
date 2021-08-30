@@ -18,12 +18,6 @@ public class Hero extends CombatUnit{
         this.kill = 0;
     }
 
-//    public Hero(String name, int health, int gold, int experience, int kill, int strength, int agility, int luck,
-//                int damage, int defence, int level) {
-//        super(name, health, gold, experience, strength, agility, luck, damage, defence, level);
-//        this.kill = kill;
-//    }
-
     public int getKill() {
         return kill;
     }
@@ -69,7 +63,6 @@ public class Hero extends CombatUnit{
             return getTotalDamage();
         }
     }
-
     @Override
     public int defence() {
         defence = DEFENCE + level + agility / 5;
@@ -89,7 +82,6 @@ public class Hero extends CombatUnit{
             default -> System.out.println("Некорректный ввод");
         }
     }
-
 
     //Item methods
     public void showBackpack(){
@@ -126,24 +118,22 @@ public class Hero extends CombatUnit{
         System.out.println(name + " выпил " + potion.name + ". Текущее здоровье " + health + "/" + maxHP);
     }
     public void arm(Item equip){
-        if(equip == Merchant.equips.get(0) || equip == Merchant.equips.get(2)){
-            if(getWeapon() == null){
-                setWeapon((Weapon)equip);
-            } else {
+        if(equip instanceof Weapon){
+            if(getWeapon() != null) {
+                putInBackPack(weapon);
                 disarm(weapon);
-                setWeapon((Weapon)equip);
             }
+            setWeapon((Weapon)equip);
         } else {
-            if(getArmor() == null){
-                setArmor((Armor) equip);
-            } else {
+            if(getArmor() != null) {
+                putInBackPack(armor);
                 disarm(armor);
-                setArmor((Armor)equip);
             }
+            setArmor((Armor) equip);
         }
         equip.setQuantity(equip.getQuantity() - 1);
+        removeFromBackpack();
     }
-
     public void disarm(Item equip){
         putInBackPack(equip);
         if(equip instanceof Weapon){
@@ -152,7 +142,6 @@ public class Hero extends CombatUnit{
             setArmor(null);
         }
     }
-
 
     public String getInfoFull() {
         return "Герой: " + name + ", уровень: " + level + ", опыт: " + experience + "/" + lvlUpThreshold +

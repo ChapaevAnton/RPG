@@ -15,7 +15,8 @@ public class Battle {
     private final List<CombatUnit> monsters;
     private final Random random = new Random(47);
     private int counter = 0;
-    private Scanner input = new Scanner(System.in);
+    private final Scanner input = new Scanner(System.in);
+    private boolean backpackOpen = false;
 
     public Battle(Hero hero, List<CombatUnit> monsters) {
         this.hero = hero;
@@ -29,10 +30,10 @@ public class Battle {
                 for(int i = 0; i < monsters.size(); i++){
                     System.out.println((i + 1) + ". Атака: " + monsters.get(i).getName());
                 }
-
-                System.out.println((monsters.size() + 1) + " " + "Сплэш-атака!");
+                System.out.println((monsters.size() + 1) + ". Сплэш-атака!");
+                System.out.println((monsters.size() + 2) + ". Залезть в рюкзак.");
                 int choice = input.nextInt();
-                if(choice > monsters.size() + 1 || choice < 1){ //TODO make an exception for chars and words
+                if(choice > monsters.size() + 2 || choice < 1){ //TODO make an exception for chars and words
                     System.out.println("Неверный выбор.");
                     continue;
                 }
@@ -41,7 +42,7 @@ public class Battle {
                     splash(hero, monsters);
                 }
                 else if (choice == monsters.size() + 2){ //TODO make an appropriate condition
-
+                    inventory();
                 }
                 else {
                     strike(hero, monsters.get(choice - 1));
@@ -76,12 +77,24 @@ public class Battle {
         }
     }
 
-
     public void inventory(){
-        hero.showBackpack();
-        int choice = input.nextInt();
-        switch(choice){
-
+        backpackOpen = true;
+        while(backpackOpen){
+            hero.showBackpack();
+            System.out.println("Что пользуем, что надеваем?");
+            for(int i = 0; i < Hero.backpackSize(); i++){
+                System.out.print((i + 1) + ". ");
+                System.out.println(hero.getBackpackItem(i + 1).name);
+            }
+            System.out.println((Hero.backpackSize() + 1) + ". Выход");
+            int choice = input.nextInt();
+            if(choice == (Hero.backpackSize() + 1)){
+                backpackOpen = false;
+            } else if(choice > Hero.backpackSize() + 1){
+                System.out.println("Некорретный ввод");
+            } else {
+                hero.useItem(hero.getBackpackItem(choice));
+            }
         }
     }
 
